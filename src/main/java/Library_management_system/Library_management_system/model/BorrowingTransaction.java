@@ -13,51 +13,41 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "borrowing_transactions")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class BorrowingTransaction {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-    @NotNull(message = "Book is required")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id", nullable = false)
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id")
     private Book book;
-    
-    @NotNull(message = "Member is required")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_id")
     private Member member;
-    
-    @NotNull(message = "Borrowed by user is required")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "borrowed_by", nullable = false)
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "borrowed_by")
     private User borrowedBy;
-    
+
     @Column(name = "borrow_date")
     private LocalDateTime borrowDate;
-    
-    @NotNull(message = "Due date is required")
-    @Column(name = "due_date", nullable = false)
+
+    @Column(name = "due_date")
     private LocalDateTime dueDate;
-    
+
     @Column(name = "return_date")
     private LocalDateTime returnDate;
-    
+
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TransactionStatus status = TransactionStatus.BORROWED;
-    
+    private TransactionStatus status;
+
     public enum TransactionStatus {
         BORROWED, RETURNED, OVERDUE, LOST
     }

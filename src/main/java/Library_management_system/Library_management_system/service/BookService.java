@@ -1,12 +1,12 @@
 package Library_management_system.Library_management_system.service;
 
-import Library_management_system.Library_management_system.model.Book;
-import Library_management_system.Library_management_system.repository.BookRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import Library_management_system.Library_management_system.model.Book;
+import Library_management_system.Library_management_system.repository.BookRepository;
 
 @Service
 public class BookService {
@@ -14,62 +14,41 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
     
+    // Get all books
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
     
+    // Get book by ID
     public Book getBookById(Integer id) {
-        Optional<Book> book = bookRepository.findById(id);
-        if (book.isPresent()) {
-            return book.get();
-        }
-        return null;
+        return bookRepository.findById(id).orElse(null);
     }
     
+    // Get book by ISBN
     public Book getBookByIsbn(String isbn) {
-        Optional<Book> book = bookRepository.findByIsbn(isbn);
-        if (book.isPresent()) {
-            return book.get();
-        }
-        return null;
+        return bookRepository.findByIsbn(isbn).orElse(null);
     }
     
+    // Search books
     public List<Book> searchBooks(String searchTerm) {
-        return bookRepository.findByTitleOrIsbnOrAuthorContaining(searchTerm);
+        return bookRepository.findByTitleContainingIgnoreCase(searchTerm);
     }
     
-    public List<Book> getAvailableBooks() {
-        return bookRepository.findByAvailableCopiesGreaterThan(0);
-    }
-    
-    public List<Book> getBooksByLanguageId(Integer languageId) {
-        return bookRepository.findByLanguageId(languageId);
-    }
-    
-    public List<Book> getBooksByEdition(String edition) {
-        return bookRepository.findByEditionContainingIgnoreCase(edition);
-    }
-    
-    public List<Book> searchBooksBySummary(String searchTerm) {
-        return bookRepository.findBySummaryContaining(searchTerm);
-    }
-    
+    // Save book
     public Book saveBook(Book book) {
-        if (bookRepository.existsByIsbn(book.getIsbn())) {
-            return null; // Book already exists
-        }
         return bookRepository.save(book);
     }
     
+    // Update book
     public Book updateBook(Integer id, Book bookDetails) {
-        Book book = bookRepository.findById(id).orElse(null);
+        Book book = getBookById(id);
         if (book == null) {
             return null;
         }
         
         book.setTitle(bookDetails.getTitle());
         book.setIsbn(bookDetails.getIsbn());
-        book.setAuthor(bookDetails.getAuthor());
+        book.setAuthors(bookDetails.getAuthors());
         book.setPublicationYear(bookDetails.getPublicationYear());
         book.setLanguage(bookDetails.getLanguage());
         book.setEdition(bookDetails.getEdition());
@@ -83,22 +62,14 @@ public class BookService {
         return bookRepository.save(book);
     }
     
+    // Delete book
     public boolean deleteBook(Integer id) {
-        Book book = bookRepository.findById(id).orElse(null);
+        Book book = getBookById(id);
         if (book == null) {
             return false;
         }
         
         bookRepository.delete(book);
         return true;
-    }
-    
-    public void updateAvailableCopies(Integer bookId, int change) {
-        Book book = bookRepository.findById(bookId).orElse(null);
-        if (book != null) {
-            int newAvailableCopies = book.getAvailableCopies() + change;
-            book.setAvailableCopies(newAvailableCopies);
-            bookRepository.save(book);
-        }
     }
 }

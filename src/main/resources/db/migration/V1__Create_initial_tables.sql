@@ -12,15 +12,26 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
+    address VARCHAR(500),
     role_id INT UNIQUE, -- enforce One-to-One
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
--- Create categories table
+-- Create authors table
+CREATE TABLE authors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    biography VARCHAR(1000)
+);
+
+-- Create categories table (hierarchical structure)
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    description VARCHAR(200)
+    description VARCHAR(200),
+    parent_id INT NULL,
+    FOREIGN KEY (parent_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 
 -- Create publishers table
@@ -41,11 +52,10 @@ CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     isbn VARCHAR(20) NOT NULL UNIQUE,
-    author VARCHAR(100) NOT NULL,
     publication_year INT,
     language_id INT,
     edition VARCHAR(50),
-    summary TEXT,
+    summary VARCHAR(2000),
     cover_image_url VARCHAR(500),
     total_copies INT DEFAULT 1,
     available_copies INT DEFAULT 1,
@@ -56,13 +66,24 @@ CREATE TABLE books (
     FOREIGN KEY (language_id) REFERENCES languages(id) ON DELETE SET NULL
 );
 
+-- Create book_authors junction table for many-to-many relationship
+CREATE TABLE book_authors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    book_id INT NOT NULL,
+    author_id INT NOT NULL,
+    UNIQUE KEY unique_book_author (book_id, author_id),
+    FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+    FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE
+);
+
 -- Create members table
 CREATE TABLE members (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    phone VARCHAR(20)
+    phone VARCHAR(20),
+    address VARCHAR(500)
 );
 
 -- Create borrowing_transactions table

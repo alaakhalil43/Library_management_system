@@ -1,12 +1,12 @@
 package Library_management_system.Library_management_system.service;
 
-import Library_management_system.Library_management_system.model.Member;
-import Library_management_system.Library_management_system.repository.MemberRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import Library_management_system.Library_management_system.model.Member;
+import Library_management_system.Library_management_system.repository.MemberRepository;
 
 @Service
 public class MemberService {
@@ -14,40 +14,29 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
     
+    // Get all members
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
     }
     
+    // Get member by ID
     public Member getMemberById(Integer id) {
-        Optional<Member> member = memberRepository.findById(id);
-        if (member.isPresent()) {
-            return member.get();
-        }
-        return null;
+        return memberRepository.findById(id).orElse(null);
     }
     
-    
+    // Get member by email
     public Member getMemberByEmail(String email) {
-        Optional<Member> member = memberRepository.findByEmail(email);
-        if (member.isPresent()) {
-            return member.get();
-        }
-        return null;
+        return memberRepository.findByEmail(email).orElse(null);
     }
     
-    public List<Member> searchMembers(String searchTerm) {
-        return memberRepository.findByNameContaining(searchTerm);
-    }
-    
+    // Save member
     public Member saveMember(Member member) {
-        if (memberRepository.existsByEmail(member.getEmail())) {
-            return null; // Email already exists
-        }
         return memberRepository.save(member);
     }
     
+    // Update member
     public Member updateMember(Integer id, Member memberDetails) {
-        Member member = memberRepository.findById(id).orElse(null);
+        Member member = getMemberById(id);
         if (member == null) {
             return null;
         }
@@ -56,12 +45,14 @@ public class MemberService {
         member.setLastName(memberDetails.getLastName());
         member.setEmail(memberDetails.getEmail());
         member.setPhone(memberDetails.getPhone());
+        member.setAddress(memberDetails.getAddress());
         
         return memberRepository.save(member);
     }
     
+    // Delete member
     public boolean deleteMember(Integer id) {
-        Member member = memberRepository.findById(id).orElse(null);
+        Member member = getMemberById(id);
         if (member == null) {
             return false;
         }
@@ -69,5 +60,4 @@ public class MemberService {
         memberRepository.delete(member);
         return true;
     }
-    
 }

@@ -1,65 +1,60 @@
 package Library_management_system.Library_management_system.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import Library_management_system.Library_management_system.model.Member;
 import Library_management_system.Library_management_system.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/members")
-@CrossOrigin(origins = "*")
 public class MemberController {
     
     @Autowired
     private MemberService memberService;
     
+    // Get all members
     @GetMapping
     public List<Member> getAllMembers() {
         return memberService.getAllMembers();
     }
     
+    // Get member by ID
     @GetMapping("/{id}")
     public Member getMemberById(@PathVariable Integer id) {
         return memberService.getMemberById(id);
     }
     
-    
-    @GetMapping("/search")
-    public List<Member> searchMembers(@RequestParam String q) {
-        return memberService.searchMembers(q);
+    // Get member by email
+    @GetMapping("/email/{email}")
+    public Member getMemberByEmail(@PathVariable String email) {
+        return memberService.getMemberByEmail(email);
     }
     
+    // Create member
     @PostMapping
-    public ResponseEntity<Member> createMember(@RequestBody Member member) {
-        Member createdMember = memberService.saveMember(member);
-        if (createdMember != null) {
-            return new ResponseEntity<>(createdMember, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public Member createMember(@RequestBody Member member) {
+        return memberService.saveMember(member);
     }
     
+    // Update member
     @PutMapping("/{id}")
-    public ResponseEntity<Member> updateMember(@PathVariable Integer id, @RequestBody Member memberDetails) {
-        Member updatedMember = memberService.updateMember(id, memberDetails);
-        if (updatedMember != null) {
-            return new ResponseEntity<>(updatedMember, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public Member updateMember(@PathVariable Integer id, @RequestBody Member memberDetails) {
+        return memberService.updateMember(id, memberDetails);
     }
     
+    // Delete member
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable Integer id) {
-        boolean deleted = memberService.deleteMember(id);
-        if (deleted) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public boolean deleteMember(@PathVariable Integer id) {
+        return memberService.deleteMember(id);
     }
 }
