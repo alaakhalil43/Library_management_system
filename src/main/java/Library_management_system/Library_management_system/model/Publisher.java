@@ -2,6 +2,8 @@ package Library_management_system.Library_management_system.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,5 +38,6 @@ public class Publisher {
     private String description;
     
     @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Book> books;
 }

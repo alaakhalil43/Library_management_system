@@ -22,10 +22,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     
     boolean existsByEmail(String email);
     
-    @Query("SELECT u FROM User u JOIN u.roles r WHERE r = :role")
+    @Query("SELECT u FROM User u WHERE u.role = :role")
     List<User> findByRole(@Param("role") Role role);
     
-    @Query("SELECT u FROM User u JOIN u.roles r WHERE r.id = :roleId")
+    @Query("SELECT u FROM User u WHERE u.role.id = :roleId")
     List<User> findByRoleId(@Param("roleId") Integer roleId);
     
     @Query("SELECT u FROM User u WHERE u.firstName LIKE %:name% OR u.lastName LIKE %:name%")

@@ -26,13 +26,6 @@ public class MemberService {
         return null;
     }
     
-    public Member getMemberByMemberId(String memberId) {
-        Optional<Member> member = memberRepository.findByMemberId(memberId);
-        if (member.isPresent()) {
-            return member.get();
-        }
-        return null;
-    }
     
     public Member getMemberByEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
@@ -47,9 +40,6 @@ public class MemberService {
     }
     
     public Member saveMember(Member member) {
-        if (memberRepository.existsByMemberId(member.getMemberId())) {
-            return null; // Member already exists
-        }
         if (memberRepository.existsByEmail(member.getEmail())) {
             return null; // Email already exists
         }
@@ -62,7 +52,6 @@ public class MemberService {
             return null;
         }
         
-        member.setMemberId(memberDetails.getMemberId());
         member.setFirstName(memberDetails.getFirstName());
         member.setLastName(memberDetails.getLastName());
         member.setEmail(memberDetails.getEmail());
@@ -81,8 +70,4 @@ public class MemberService {
         return true;
     }
     
-    public String generateMemberId() {
-        long count = memberRepository.count();
-        return "M" + String.format("%03d", count + 1);
-    }
 }

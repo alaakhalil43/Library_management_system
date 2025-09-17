@@ -12,17 +12,10 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Integer> {
     
-    Optional<Member> findByMemberId(String memberId);
-    
     Optional<Member> findByEmail(String email);
-    
-    boolean existsByMemberId(String memberId);
     
     boolean existsByEmail(String email);
     
     @Query("SELECT m FROM Member m WHERE m.firstName LIKE %:name% OR m.lastName LIKE %:name%")
     List<Member> findByNameContaining(@Param("name") String name);
-    
-    @Query("SELECT m FROM Member m WHERE m.memberId LIKE %:memberId%")
-    List<Member> findByMemberIdContaining(@Param("memberId") String memberId);
 }

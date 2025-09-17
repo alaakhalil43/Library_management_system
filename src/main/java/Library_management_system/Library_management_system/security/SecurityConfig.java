@@ -67,8 +67,9 @@ public class SecurityConfig {
                 .requestMatchers("/api/borrowing/**").authenticated()
                 
                 // Admin only endpoints
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/users/**").hasAnyRole("ADMIN", "LIBRARIAN")
+                .requestMatchers("/api/admin/**").hasRole("ADMINISTRATOR")
+                .requestMatchers("/api/users/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN")
+                .requestMatchers("/api/roles/**").hasRole("ADMINISTRATOR")
                 
                 // All other requests need authentication
                 .anyRequest().authenticated()

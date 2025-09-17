@@ -1,7 +1,7 @@
 -- Create roles table
 CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(20) NOT NULL UNIQUE
+    name ENUM('STAFF', 'LIBRARIAN', 'ADMINISTRATOR') NOT NULL UNIQUE
 );
 
 -- Create users table
@@ -11,15 +11,8 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL
-);
-
--- Create user_roles junction table for many-to-many relationship
-CREATE TABLE user_roles (
-    user_id INT NOT NULL,
-    role_id INT NOT NULL,
-    PRIMARY KEY (user_id, role_id),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    last_name VARCHAR(50) NOT NULL,
+    role_id INT UNIQUE, -- enforce One-to-One
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
@@ -66,7 +59,6 @@ CREATE TABLE books (
 -- Create members table
 CREATE TABLE members (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    member_id VARCHAR(20) NOT NULL UNIQUE,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,

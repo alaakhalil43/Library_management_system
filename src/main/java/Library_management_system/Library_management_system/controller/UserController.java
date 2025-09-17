@@ -1,13 +1,22 @@
 package Library_management_system.Library_management_system.controller;
 
-import Library_management_system.Library_management_system.model.User;
-import Library_management_system.Library_management_system.service.UserService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import Library_management_system.Library_management_system.model.User;
+import Library_management_system.Library_management_system.service.UserService;
 
 @RestController
 @RequestMapping("/api/users")
@@ -37,25 +46,6 @@ public class UserController {
         return userService.getUsersByRoleId(roleId);
     }
     
-    @PostMapping("/{userId}/roles/{roleId}")
-    public ResponseEntity<User> addRoleToUser(@PathVariable Integer userId, @PathVariable Integer roleId) {
-        User user = userService.addRoleToUser(userId, roleId);
-        if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-    
-    @DeleteMapping("/{userId}/roles/{roleId}")
-    public ResponseEntity<User> removeRoleFromUser(@PathVariable Integer userId, @PathVariable Integer roleId) {
-        User user = userService.removeRoleFromUser(userId, roleId);
-        if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
     
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {

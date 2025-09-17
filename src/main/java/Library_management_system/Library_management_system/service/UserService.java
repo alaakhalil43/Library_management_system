@@ -16,9 +16,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     
-    @Autowired
-    private RoleService roleService;
-    
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -59,36 +56,6 @@ public class UserService {
         return userRepository.findByRoleId(roleId);
     }
     
-    public User addRoleToUser(Integer userId, Integer roleId) {
-        User user = userRepository.findById(userId).orElse(null);
-        if (user == null) {
-            return null;
-        }
-        
-        Role role = roleService.getRoleById(roleId);
-        if (role == null) {
-            return null;
-        }
-        
-        user.getRoles().add(role);
-        return userRepository.save(user);
-    }
-    
-    public User removeRoleFromUser(Integer userId, Integer roleId) {
-        User user = userRepository.findById(userId).orElse(null);
-        if (user == null) {
-            return null;
-        }
-        
-        Role role = roleService.getRoleById(roleId);
-        if (role == null) {
-            return null;
-        }
-        
-        user.getRoles().remove(role);
-        return userRepository.save(user);
-    }
-    
     public User saveUser(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
             return null; // Username already exists
@@ -122,7 +89,7 @@ public class UserService {
         user.setPassword(userDetails.getPassword());
         user.setFirstName(userDetails.getFirstName());
         user.setLastName(userDetails.getLastName());
-        user.setRoles(userDetails.getRoles());
+        user.setRole(userDetails.getRole());
         
         return userRepository.save(user);
     }

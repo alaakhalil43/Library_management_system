@@ -27,10 +27,6 @@ public class MemberController {
         return memberService.getMemberById(id);
     }
     
-    @GetMapping("/member-id/{memberId}")
-    public Member getMemberByMemberId(@PathVariable String memberId) {
-        return memberService.getMemberByMemberId(memberId);
-    }
     
     @GetMapping("/search")
     public List<Member> searchMembers(@RequestParam String q) {
@@ -39,10 +35,6 @@ public class MemberController {
     
     @PostMapping
     public ResponseEntity<Member> createMember(@RequestBody Member member) {
-        if (member.getMemberId() == null || member.getMemberId().isEmpty()) {
-            member.setMemberId(memberService.generateMemberId());
-        }
-        
         Member createdMember = memberService.saveMember(member);
         if (createdMember != null) {
             return new ResponseEntity<>(createdMember, HttpStatus.CREATED);

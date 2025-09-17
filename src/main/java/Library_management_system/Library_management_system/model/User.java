@@ -1,20 +1,29 @@
 package Library_management_system.Library_management_system.model;
 
-import jakarta.persistence.*;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -40,6 +49,7 @@ public class User implements UserDetails {
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password must be at least 6 characters")
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
     
     @NotBlank(message = "First name is required")
@@ -50,48 +60,49 @@ public class User implements UserDetails {
     @Column(name = "last_name", nullable = false)
     private String lastName;
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "user_roles",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private Role role;
     
     // UserDetails implementation
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
-                .collect(java.util.stream.Collectors.toList());
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.getName()));
     }
     
     @Override
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
     
     @Override
+    @JsonIgnore
     public String getUsername() {
         return username;
     }
     
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
     
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
     
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
     
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
