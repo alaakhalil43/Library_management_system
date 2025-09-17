@@ -1,42 +1,52 @@
 package Library_management_system.Library_management_system.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import Library_management_system.Library_management_system.model.BorrowingTransaction;
 import Library_management_system.Library_management_system.service.BorrowingTransactionService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/borrowing")
-@CrossOrigin(origins = "*")
 public class BorrowingTransactionController {
     
     @Autowired
     private BorrowingTransactionService borrowingTransactionService;
     
+    // Get all transactions
     @GetMapping
     public List<BorrowingTransaction> getAllTransactions() {
         return borrowingTransactionService.getAllTransactions();
     }
     
+    // Get transaction by ID
     @GetMapping("/{id}")
     public BorrowingTransaction getTransactionById(@PathVariable Integer id) {
         return borrowingTransactionService.getTransactionById(id);
     }
     
+    // Get transactions by member
     @GetMapping("/member/{memberId}")
     public List<BorrowingTransaction> getTransactionsByMember(@PathVariable Integer memberId) {
         return borrowingTransactionService.getTransactionsByMember(memberId);
     }
     
+    // Get transactions by book
     @GetMapping("/book/{bookId}")
     public List<BorrowingTransaction> getTransactionsByBook(@PathVariable Integer bookId) {
         return borrowingTransactionService.getTransactionsByBook(bookId);
     }
     
+    // Get transactions by status
     @GetMapping("/status/{status}")
     public List<BorrowingTransaction> getTransactionsByStatus(@PathVariable String status) {
         BorrowingTransaction.TransactionStatus transactionStatus = 
@@ -44,60 +54,21 @@ public class BorrowingTransactionController {
         return borrowingTransactionService.getTransactionsByStatus(transactionStatus);
     }
     
-    @PostMapping("/borrow")
-    public ResponseEntity<BorrowingTransaction> borrowBook(@RequestBody BorrowRequest request) {
-        BorrowingTransaction transaction = borrowingTransactionService.borrowBook(
-            request.getBookId(), 
-            request.getMemberId(), 
-            request.getBorrowedById(), 
-            request.getDaysToReturn()
-        );
-        
-        if (transaction != null) {
-            return new ResponseEntity<>(transaction, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    // Create transaction
+    @PostMapping
+    public BorrowingTransaction createTransaction(@RequestBody BorrowingTransaction transaction) {
+        return borrowingTransactionService.saveTransaction(transaction);
     }
     
-    @PutMapping("/{id}/return")
-    public ResponseEntity<BorrowingTransaction> returnBook(@PathVariable Integer id) {
-        BorrowingTransaction transaction = borrowingTransactionService.returnBook(id);
-        if (transaction != null) {
-            return new ResponseEntity<>(transaction, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    // Update transaction
+    @PutMapping("/{id}")
+    public BorrowingTransaction updateTransaction(@PathVariable Integer id, @RequestBody BorrowingTransaction transactionDetails) {
+        return borrowingTransactionService.updateTransaction(id, transactionDetails);
     }
     
-    @PutMapping("/{id}/lost")
-    public ResponseEntity<BorrowingTransaction> markAsLost(@PathVariable Integer id) {
-        BorrowingTransaction transaction = borrowingTransactionService.markAsLost(id);
-        if (transaction != null) {
-            return new ResponseEntity<>(transaction, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-    
-    // Simple inner class for borrow request
-    public static class BorrowRequest {
-        private Integer bookId;
-        private Integer memberId;
-        private Integer borrowedById;
-        private int daysToReturn = 14; // Default 14 days
-        
-        // Getters and setters
-        public Integer getBookId() { return bookId; }
-        public void setBookId(Integer bookId) { this.bookId = bookId; }
-        
-        public Integer getMemberId() { return memberId; }
-        public void setMemberId(Integer memberId) { this.memberId = memberId; }
-        
-        public Integer getBorrowedById() { return borrowedById; }
-        public void setBorrowedById(Integer borrowedById) { this.borrowedById = borrowedById; }
-        
-        public int getDaysToReturn() { return daysToReturn; }
-        public void setDaysToReturn(int daysToReturn) { this.daysToReturn = daysToReturn; }
+    // Delete transaction
+    @DeleteMapping("/{id}")
+    public boolean deleteTransaction(@PathVariable Integer id) {
+        return borrowingTransactionService.deleteTransaction(id);
     }
 }

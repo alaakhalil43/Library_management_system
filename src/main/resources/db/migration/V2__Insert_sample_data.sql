@@ -19,7 +19,7 @@ INSERT INTO authors (first_name, last_name, biography) VALUES
 ('Stephen', 'King', 'American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels. He has published 64 novels and 200 short stories.'),
 ('Agatha', 'Christie', 'English writer known for her sixty-six detective novels and fourteen short story collections, particularly those revolving around fictional detectives Hercule Poirot and Miss Marple.'),
 ('Robert C.', 'Martin', 'American software engineer and instructor. He is best known for being one of the authors of the Agile Manifesto and for developing several software design principles.'),
-('Martin', 'Fowler', 'British software developer, author and international public speaker on software development, specialising in object-oriented analysis and design, UML, patterns, and agile software development methodologies.'),
+('Martin', 'Fowler', 'British software developer, author and international public speaker on software development, specialising in object-oriented analysis and and design, UML, patterns, and agile software development methodologies.'),
 ('Eric', 'Evans', 'Software engineer and author. He is the author of Domain-Driven Design: Tackling Complexity in the Heart of Software, which describes the discipline of domain-driven design.');
 
 -- Insert sample categories with hierarchical structure

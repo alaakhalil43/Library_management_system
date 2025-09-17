@@ -3,6 +3,9 @@ package Library_management_system.Library_management_system.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,44 +20,60 @@ import Library_management_system.Library_management_system.service.UserService;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "*")
 public class UserController {
     
     @Autowired
     private UserService userService;
     
-    // Get all users
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
     
-    // Get user by ID
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Integer id) {
         return userService.getUserById(id);
     }
     
-    // Get user by username
     @GetMapping("/username/{username}")
     public User getUserByUsername(@PathVariable String username) {
         return userService.getUserByUsername(username);
     }
     
-    // Create user
+    @GetMapping("/role/{roleId}")
+    public List<User> getUsersByRoleId(@PathVariable Integer roleId) {
+        return userService.getUsersByRoleId(roleId);
+    }
+    
+    
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User createdUser = userService.saveUser(user);
+        if (createdUser != null) {
+            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
     
-    // Update user
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Integer id, @RequestBody User userDetails) {
-        return userService.updateUser(id, userDetails);
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User userDetails) {
+        User updatedUser = userService.updateUser(id, userDetails);
+        if (updatedUser != null) {
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     
-    // Delete user
     @DeleteMapping("/{id}")
-    public boolean deleteUser(@PathVariable Integer id) {
-        return userService.deleteUser(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+        boolean deleted = userService.deleteUser(id);
+        if (deleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

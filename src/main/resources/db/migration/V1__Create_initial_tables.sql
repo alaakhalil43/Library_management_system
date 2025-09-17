@@ -13,7 +13,7 @@ CREATE TABLE users (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     address VARCHAR(500),
-    role_id INT UNIQUE, -- enforce One-to-One
+    role_id INT NOT NULL,
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
