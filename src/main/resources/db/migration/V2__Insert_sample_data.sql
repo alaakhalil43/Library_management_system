@@ -1,0 +1,69 @@
+-- Insert sample roles
+INSERT INTO roles (name) VALUES
+('ADMIN'),
+('LIBRARIAN'),
+('STAFF');
+
+-- Insert sample users
+INSERT INTO users (username, email, password, first_name, last_name) VALUES
+('admin', 'admin@library.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', 'Admin', 'User'),
+('librarian1', 'librarian1@library.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', 'Jane', 'Smith'),
+('staff1', 'staff1@library.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', 'John', 'Doe'),
+('superuser', 'superuser@library.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', 'Super', 'User');
+
+-- Insert user roles (many-to-many relationship)
+INSERT INTO user_roles (user_id, role_id) VALUES
+(1, 1), -- admin has ADMIN role
+(2, 2), -- librarian1 has LIBRARIAN role
+(3, 3), -- staff1 has STAFF role
+(4, 1), -- superuser has ADMIN role
+(4, 2); -- superuser also has LIBRARIAN role
+
+-- Insert sample categories
+INSERT INTO categories (name, description) VALUES
+('Fiction', 'Fictional literature including novels and stories'),
+('Non-Fiction', 'Non-fictional literature including biographies and history'),
+('Science', 'Scientific literature and research materials'),
+('Technology', 'Technology and computer science books'),
+('Mystery', 'Mystery and detective fiction'),
+('Romance', 'Romance novels');
+
+-- Insert sample publishers
+INSERT INTO publishers (name, description) VALUES
+('Penguin Random House', 'One of the largest publishing companies'),
+('HarperCollins', 'Major publishing company'),
+('O''Reilly Media', 'Technology and programming books'),
+('MIT Press', 'Academic and scientific publications'),
+('Oxford University Press', 'Academic and reference books');
+
+-- Insert sample languages
+INSERT INTO languages (name) VALUES
+('English'),
+('Spanish'),
+('French'),
+('German'),
+('Italian'),
+('Portuguese'),
+('Russian'),
+('Chinese'),
+('Japanese'),
+('Arabic');
+
+-- Insert sample books
+INSERT INTO books (title, isbn, author, publication_year, language_id, edition, summary, cover_image_url, total_copies, available_copies, category_id, publisher_id) VALUES
+('Harry Potter and the Philosopher''s Stone', '978-0747532699', 'J.K. Rowling', 1997, 1, '1st Edition', 'A young wizard discovers his magical heritage and attends Hogwarts School of Witchcraft and Wizardry.', 'https://example.com/covers/harry-potter-1.jpg', 5, 5, 1, 1),
+('1984', '978-0451524935', 'George Orwell', 1949, 1, '1st Edition', 'A dystopian social science fiction novel about totalitarian control and surveillance.', 'https://example.com/covers/1984.jpg', 3, 3, 1, 1),
+('Foundation', '978-0553293357', 'Isaac Asimov', 1951, 1, '1st Edition', 'The first book in the Foundation series, a science fiction epic about the fall and rise of galactic civilization.', 'https://example.com/covers/foundation.jpg', 2, 2, 3, 1),
+('The Shining', '978-0307743657', 'Stephen King', 1977, 1, '1st Edition', 'A horror novel about a family who becomes the caretakers of an isolated hotel with a dark past.', 'https://example.com/covers/shining.jpg', 4, 4, 1, 2),
+('Murder on the Orient Express', '978-0062693662', 'Agatha Christie', 1934, 1, '1st Edition', 'A mystery novel featuring detective Hercule Poirot investigating a murder on a luxury train.', 'https://example.com/covers/orient-express.jpg', 3, 3, 5, 2),
+('Clean Code', '978-0132350884', 'Robert C. Martin', 2008, 1, '1st Edition', 'A handbook of agile software craftsmanship focusing on writing clean, maintainable code.', 'https://example.com/covers/clean-code.jpg', 2, 2, 4, 3),
+('Refactoring', '978-0134757599', 'Martin Fowler', 2018, 1, '2nd Edition', 'A guide to improving the design of existing code through refactoring techniques.', 'https://example.com/covers/refactoring.jpg', 2, 2, 4, 3),
+('Domain-Driven Design', '978-0321125217', 'Eric Evans', 2003, 1, '1st Edition', 'A comprehensive guide to domain-driven design principles and practices for software development.', 'https://example.com/covers/ddd.jpg', 1, 1, 4, 4);
+
+-- Insert sample members
+INSERT INTO members (member_id, first_name, last_name, email, phone) VALUES
+('M001', 'Alice', 'Johnson', 'alice.johnson@email.com', '555-0101'),
+('M002', 'Bob', 'Wilson', 'bob.wilson@email.com', '555-0102'),
+('M003', 'Carol', 'Davis', 'carol.davis@email.com', '555-0103'),
+('M004', 'David', 'Brown', 'david.brown@email.com', '555-0104'),
+('M005', 'Eva', 'Miller', 'eva.miller@email.com', '555-0105');
