@@ -100,3 +100,13 @@ CREATE TABLE borrowing_transactions (
     FOREIGN KEY (member_id) REFERENCES members(id) ON DELETE CASCADE,
     FOREIGN KEY (borrowed_by) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- Create user_activity_logs table
+CREATE TABLE user_activity_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    action VARCHAR(255) NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+

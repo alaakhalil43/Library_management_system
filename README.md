@@ -22,7 +22,7 @@ A simple Spring Boot application for managing library operations including books
 
 ## Database Schema
 
-The system uses a simple database schema with 6 main tables:
+The system uses a simple database schema with 7 main tables:
 
 1. **users** - System users (admin, librarian, staff)
 2. **books** - Library books with basic information
@@ -30,6 +30,7 @@ The system uses a simple database schema with 6 main tables:
 4. **categories** - Book categories/genres
 5. **publishers** - Book publishers
 6. **borrowing_transactions** - Book borrowing records
+7. **user_activity_logs** - User activity logging
 
 ## API Endpoints
 
@@ -65,6 +66,18 @@ The system uses a simple database schema with 6 main tables:
 - `PUT /api/users/{id}` - Update user
 - `DELETE /api/users/{id}` - Delete user
 
+### Authors
+- `GET /api/authors` - Get all authors
+- `GET /api/authors/{id}` - Get author by ID
+- `GET /api/authors/first-name?firstName={name}` - Get authors by first name
+- `GET /api/authors/last-name?lastName={name}` - Get authors by last name
+- `GET /api/authors/full-name?name={name}` - Get authors by full name
+- `GET /api/authors/search?q={term}` - Search authors
+- `GET /api/authors/biography?biography={text}` - Search authors by biography
+- `POST /api/authors` - Create new author
+- `PUT /api/authors/{id}` - Update author
+- `DELETE /api/authors/{id}` - Delete author
+
 ### Categories
 - `GET /api/categories` - Get all categories
 - `GET /api/categories/{id}` - Get category by ID
@@ -80,6 +93,14 @@ The system uses a simple database schema with 6 main tables:
 - `POST /api/publishers` - Create new publisher
 - `PUT /api/publishers/{id}` - Update publisher
 - `DELETE /api/publishers/{id}` - Delete publisher
+
+### Activity Logs (Admin/Librarian only)
+- `GET /api/activity-logs` - Get all activity logs
+- `GET /api/activity-logs/recent` - Get recent activity logs (last 50)
+- `GET /api/activity-logs/user/{userId}` - Get logs by user ID
+- `GET /api/activity-logs/search?q={term}` - Search logs by action text
+- `GET /api/activity-logs/count/user/{userId}` - Get activity count by user
+- `GET /api/activity-logs/count` - Get total activity logs count
 
 ## Setup Instructions
 
@@ -141,6 +162,28 @@ src/main/resources/
 4. **Role-based Security**: Three user roles (ADMIN, LIBRARIAN, STAFF)
 5. **MySQL with Flyway**: Database migrations for version control
 6. **Simple Error Handling**: Basic null checks and simple error responses
+7. **User Activity Logging**: Automatic logging of all user activities
+
+## User Activity Logging
+
+The system includes automatic user activity logging that tracks:
+
+- **Book Operations**: Add, update, delete books
+- **Member Operations**: Add, update, delete members  
+- **Borrowing Operations**: Borrow and return books
+- **Transaction Operations**: Create, update, delete borrowing transactions
+
+### How it works:
+1. Every time a user performs an operation (add book, delete member, etc.), the system automatically logs it
+2. The log includes: user, action description, timestamp
+3. Only Administrators and Librarians can view activity logs
+4. Logs are stored in the `user_activity_logs` table
+
+### Example logged activities:
+- "Added new book: Harry Potter and the Philosopher's Stone"
+- "Updated member: Alice Johnson"
+- "Book borrowed: The Shining by Bob Wilson"
+- "Deleted book: 1984"
 
 ## Testing
 

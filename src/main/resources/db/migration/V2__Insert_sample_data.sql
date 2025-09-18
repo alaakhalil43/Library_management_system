@@ -90,3 +90,17 @@ INSERT INTO members (first_name, last_name, email, phone, address) VALUES
 ('Carol', 'Davis', 'carol.davis@email.com', '555-0103', '789 Pine Road, Chicago, IL 60601'),
 ('David', 'Brown', 'david.brown@email.com', '555-0104', '321 Elm Street, Houston, TX 77001'),
 ('Eva', 'Miller', 'eva.miller@email.com', '555-0105', '654 Maple Lane, Phoenix, AZ 85001');
+
+
+
+-- Insert sample activity logs
+INSERT INTO user_activity_logs (user_id, action, timestamp) VALUES
+(1, 'User logged in to the system', NOW() - INTERVAL 2 HOUR),
+(2, 'Added new book: Harry Potter and the Philosopher''s Stone', NOW() - INTERVAL 1 HOUR),
+(2, 'Updated book details: Harry Potter and the Philosopher''s Stone', NOW() - INTERVAL 45 MINUTE),
+(3, 'Added new member: Alice Johnson', NOW() - INTERVAL 30 MINUTE),
+(1, 'Borrowed book: Harry Potter and the Philosopher''s Stone by Alice Johnson', NOW() - INTERVAL 15 MINUTE),
+(2, 'Searched for books with term: "Harry Potter"', NOW() - INTERVAL 10 MINUTE),
+(3, 'Viewed member details: Alice Johnson', NOW() - INTERVAL 5 MINUTE),
+(1, 'Deleted book: 1984', NOW() - INTERVAL 2 MINUTE),
+(1, 'System maintenance completed', NOW() - INTERVAL 1 MINUTE);

@@ -1,18 +1,38 @@
 package Library_management_system.Library_management_system.service;
 
-import Library_management_system.Library_management_system.model.Book;
-import Library_management_system.Library_management_system.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+
+import Library_management_system.Library_management_system.model.Book;
+import Library_management_system.Library_management_system.model.User;
+import Library_management_system.Library_management_system.repository.BookRepository;
+import Library_management_system.Library_management_system.repository.UserRepository;
 
 @Service
 public class BookService {
     
     @Autowired
     private BookRepository bookRepository;
+    
+    @Autowired
+    private UserActivityLogService userActivityLogService;
+    
+    @Autowired
+    private UserRepository userRepository;
+    
+    // Method to get current user from Security Context
+    private User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            return (User) authentication.getPrincipal();
+        }
+        return null;
+    }
     
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
@@ -58,7 +78,13 @@ public class BookService {
         if (bookRepository.existsByIsbn(book.getIsbn())) {
             return null; // Book already exists
         }
-        return bookRepository.save(book);
+        Book savedBook = bookRepository.save(book);
+        
+        // Log activity with current user
+        User currentUser = getCurrentUser();
+        userActivityLogService.logActivity(currentUser, "Added new book: " + book.getTitle());
+        
+        return savedBook;
     }
     
     public Book updateBook(Integer id, Book bookDetails) {
@@ -80,7 +106,13 @@ public class BookService {
         book.setCategory(bookDetails.getCategory());
         book.setPublisher(bookDetails.getPublisher());
         
-        return bookRepository.save(book);
+        Book updatedBook = bookRepository.save(book);
+        
+        // Log activity with current user
+        User currentUser = getCurrentUser();
+        userActivityLogService.logActivity(currentUser, "Updated book: " + book.getTitle());
+        
+        return updatedBook;
     }
     
     public boolean deleteBook(Integer id) {
@@ -89,7 +121,13 @@ public class BookService {
             return false;
         }
         
+        String bookTitle = book.getTitle();
         bookRepository.delete(book);
+        
+        // Log activity with current user
+        User currentUser = getCurrentUser();
+        userActivityLogService.logActivity(currentUser, "Deleted book: " + bookTitle);
+        
         return true;
     }
     

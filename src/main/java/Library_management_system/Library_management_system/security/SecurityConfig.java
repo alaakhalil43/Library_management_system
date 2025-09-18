@@ -57,8 +57,11 @@ public class SecurityConfig {
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
                 
-                // Book endpoints - all authenticated users can read mmmmmm
+                // Book endpoints - all authenticated users can read
                 .requestMatchers("/api/books/**").permitAll()
+                
+                // Author endpoints - all authenticated users can access
+                .requestMatchers("/api/authors/**").authenticated()
                 
                 // Member endpoints - all authenticated users can read
                 .requestMatchers("/api/members/**").authenticated()
@@ -70,6 +73,9 @@ public class SecurityConfig {
                 .requestMatchers("/api/admin/**").hasRole("ADMINISTRATOR")
                 .requestMatchers("/api/users/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN")
                 .requestMatchers("/api/roles/**").hasRole("ADMINISTRATOR")
+                
+                // Activity logs endpoints - Admin/Librarian only
+                .requestMatchers("/api/activity-logs/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN")
                 
                 // All other requests need authentication
                 .anyRequest().authenticated()
