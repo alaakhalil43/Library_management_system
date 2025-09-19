@@ -1,5 +1,6 @@
 package Library_management_system.Library_management_system.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,5 +103,15 @@ public class UserService {
         
         userRepository.delete(user);
         return true;
+    }
+    
+    // Get available roles for registration (only STAFF role for public registration)
+    public List<Role> getAvailableRolesForRegistration() {
+        List<Role> roles = new ArrayList<>();
+        Role staffRole = new Role();
+        staffRole.setId(3);
+        staffRole.setName("STAFF");
+        roles.add(staffRole);
+        return roles;
     }
 }

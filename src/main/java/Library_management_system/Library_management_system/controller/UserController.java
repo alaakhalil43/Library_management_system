@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import Library_management_system.Library_management_system.model.Role;
 import Library_management_system.Library_management_system.model.User;
 import Library_management_system.Library_management_system.service.UserService;
 
@@ -55,6 +56,32 @@ public class UserController {
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+    
+    // Register endpoint - لا يحتاج authentication
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        // تحديد Role افتراضي (STAFF) إذا لم يتم تحديده
+        if (user.getRole() == null) {
+            Role defaultRole = new Role();
+            defaultRole.setId(3); // STAFF role
+            defaultRole.setName("STAFF");
+            user.setRole(defaultRole);
+        }
+        
+        User createdUser = userService.saveUser(user);
+        if (createdUser != null) {
+            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    // Get available roles for registration - لا يحتاج authentication
+    @GetMapping("/available-roles")
+    public ResponseEntity<List<Role>> getAvailableRoles() {
+        List<Role> roles = userService.getAvailableRolesForRegistration();
+        return new ResponseEntity<>(roles, HttpStatus.OK);
     }
     
     @PutMapping("/{id}")

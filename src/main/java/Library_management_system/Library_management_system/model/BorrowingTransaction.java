@@ -25,14 +25,6 @@ public class BorrowingTransaction {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "book_id")
-    private Book book;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_id")
-    private Member member;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "borrowed_by")
     private User borrowedBy;
 
@@ -51,4 +43,14 @@ public class BorrowingTransaction {
     public enum TransactionStatus {
         BORROWED, RETURNED, OVERDUE, LOST
     }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+
 }

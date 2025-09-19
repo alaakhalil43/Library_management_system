@@ -57,17 +57,21 @@ public class SecurityConfig {
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
                 
-                // Book endpoints - all authenticated users can read
-                .requestMatchers("/api/books/**").permitAll()
+                // Book endpoints - different permissions based on role
+                .requestMatchers("/api/books/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN", "STAFF")
                 
-                // Author endpoints - all authenticated users can access
-                .requestMatchers("/api/authors/**").authenticated()
+                // Author endpoints - different permissions based on role
+                .requestMatchers("/api/authors/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN", "STAFF")
                 
-                // Member endpoints - all authenticated users can read
-                .requestMatchers("/api/members/**").authenticated()
+                // Member endpoints - different permissions based on role
+                .requestMatchers("/api/members/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN", "STAFF")
                 
-                // Borrowing endpoints - all authenticated users can access
-                .requestMatchers("/api/borrowing/**").authenticated()
+                // Borrowing endpoints - different permissions based on role
+                .requestMatchers("/api/borrowing/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN", "STAFF")
+                
+                // Public endpoints (no authentication required)
+                .requestMatchers("/api/users/register").permitAll()
+                .requestMatchers("/api/users/available-roles").permitAll()
                 
                 // Admin only endpoints
                 .requestMatchers("/api/admin/**").hasRole("ADMINISTRATOR")
