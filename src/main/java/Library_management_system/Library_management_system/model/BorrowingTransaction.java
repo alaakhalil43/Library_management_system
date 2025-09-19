@@ -24,10 +24,6 @@ public class BorrowingTransaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "borrowed_by")
-    private User borrowedBy;
-
     @Column(name = "borrow_date")
     private LocalDateTime borrowDate;
 
@@ -52,5 +48,8 @@ public class BorrowingTransaction {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "borrowed_by")
+    private User borrowedBy;
 
 }

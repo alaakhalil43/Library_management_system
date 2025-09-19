@@ -31,13 +31,7 @@ public class LanguageController {
     public Language getLanguageByName(@PathVariable String name) {
         return languageService.getLanguageByName(name);
     }
-    
-    
-    @GetMapping("/search")
-    public List<Language> searchLanguages(@RequestParam String q) {
-        return languageService.searchLanguages(q);
-    }
-    
+
     @PostMapping
     public ResponseEntity<Language> createLanguage(@RequestBody Language language) {
         Language createdLanguage = languageService.saveLanguage(language);

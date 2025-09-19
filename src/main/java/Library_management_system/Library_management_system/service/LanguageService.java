@@ -34,11 +34,7 @@ public class LanguageService {
         return null;
     }
     
-    
-    public List<Language> searchLanguages(String searchTerm) {
-        return languageRepository.findByNameContainingIgnoreCase(searchTerm);
-    }
-    
+
     public Language saveLanguage(Language language) {
         if (languageRepository.existsByName(language.getName())) {
             return null; // Language name already exists

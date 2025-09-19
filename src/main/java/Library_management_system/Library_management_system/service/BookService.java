@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import Library_management_system.Library_management_system.model.Book;
 import Library_management_system.Library_management_system.model.User;
 import Library_management_system.Library_management_system.repository.BookRepository;
-import Library_management_system.Library_management_system.repository.UserRepository;
 
 @Service
 public class BookService {
@@ -21,9 +20,6 @@ public class BookService {
     
     @Autowired
     private UserActivityLogService userActivityLogService;
-    
-    @Autowired
-    private UserRepository userRepository;
     
     // Method to get current user from Security Context
     private User getCurrentUser() {

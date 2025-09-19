@@ -29,9 +29,7 @@ public class Language {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotBlank(message = "Language name is required")
-    @Size(min = 2, max = 50, message = "Language name must be between 2 and 50 characters")
-    @Column(unique = true, nullable = false)
+    @Column( name = "name", unique = true, nullable = false)
     private String name;
     
     @OneToMany(mappedBy = "language", cascade = CascadeType.ALL)

@@ -1,5 +1,4 @@
-package Library_management_system.Library_management_system.security;
-
+package Library_management_system.Library_management_system.config;
 import Library_management_system.Library_management_system.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

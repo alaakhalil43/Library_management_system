@@ -82,7 +82,7 @@ CREATE TABLE members (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    phone VARCHAR(20),
+    phone VARCHAR(20) NOT NULL UNIQUE,
     address VARCHAR(500)
 );
 

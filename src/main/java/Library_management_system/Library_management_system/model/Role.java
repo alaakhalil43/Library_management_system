@@ -26,9 +26,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotBlank(message = "Role name is required")
-    @Size(min = 2, max = 20, message = "Role name must be between 2 and 20 characters")
-    @Column(unique = true, nullable = false)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
     
     @OneToOne(mappedBy = "role", fetch = jakarta.persistence.FetchType.EAGER)

@@ -15,9 +15,5 @@ public interface LanguageRepository extends JpaRepository<Language, Integer> {
     Optional<Language> findByName(String name);
     
     boolean existsByName(String name);
-    
-    List<Language> findByNameContainingIgnoreCase(String name);
-    
-    @Query("SELECT l FROM Language l WHERE l.name LIKE %:name% ORDER BY l.name")
-    List<Language> findByNameContainingOrderByName(@Param("name") String name);
+
 }

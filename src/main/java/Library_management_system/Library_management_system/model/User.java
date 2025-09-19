@@ -35,9 +35,16 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
+    @NotBlank(message = "First name is required")
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @NotBlank(message = "Last name is required")
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
     @NotBlank(message = "Username is required")
-    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
     @Column(unique = true, nullable = false)
     private String username;
     
@@ -52,19 +59,11 @@ public class User implements UserDetails {
     @JsonIgnore
     private String password;
     
-    @NotBlank(message = "First name is required")
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-    
-    @NotBlank(message = "Last name is required")
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-    
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
     
-    // UserDetails implementation
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {

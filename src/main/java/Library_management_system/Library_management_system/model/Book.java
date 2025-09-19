@@ -24,18 +24,14 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title")
+    @Column(name = "title",nullable = false)
     private String title;
 
-    @Column(name = "isbn")
+    @Column(name = "isbn",nullable = false)
     private String isbn;
 
-    @Column(name = "publication_year")
+    @Column(name = "publication_year",nullable = false)
     private Integer publicationYear;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "language_id")
-    private Language language;
 
     @Column(name = "edition")
     private String edition;
@@ -46,10 +42,10 @@ public class Book {
     @Column(name = "cover_image_url")
     private String coverImageUrl;
     
-    @Column(name = "total_copies")
+    @Column(name = "total_copies",nullable = false)
     private Integer totalCopies;
     
-    @Column(name = "available_copies")
+    @Column(name = "available_copies",nullable = false)
     private Integer availableCopies;
     
     @ManyToOne(fetch = FetchType.EAGER)
@@ -59,6 +55,10 @@ public class Book {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "language_id")
+    private Language language;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

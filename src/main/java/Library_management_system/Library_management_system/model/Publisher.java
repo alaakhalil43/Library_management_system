@@ -29,12 +29,10 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotBlank(message = "Publisher name is required")
-    @Size(min = 2, max = 100, message = "Publisher name must be between 2 and 100 characters")
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-    
-    @Size(max = 200, message = "Description must not exceed 200 characters")
+
+    @Column(name = "description")
     private String description;
     
     @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
