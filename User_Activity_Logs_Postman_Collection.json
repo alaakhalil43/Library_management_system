@@ -1,0 +1,180 @@
+{
+    "info": {
+        "_postman_id": "11111111-1111-1111-1111-111111111111",
+        "name": "Library Management System - User Activity Logs",
+        "description": "Simple API collection for User Activity Logs",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Activity Logs",
+            "item": [
+                {
+                    "name": "Get All Activity Logs",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/activity-logs",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "activity-logs"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Recent Activity Logs",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/activity-logs/recent",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "activity-logs",
+                                "recent"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Activity Logs by User",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/activity-logs/user/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "activity-logs",
+                                "user",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Search Activity Logs",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/activity-logs/search?q=book",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "activity-logs",
+                                "search"
+                            ],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "book"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Activity Count by User",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/activity-logs/count/user/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "activity-logs",
+                                "count",
+                                "user",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Total Activity Count",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/activity-logs/count",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "activity-logs",
+                                "count"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:8080",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "your-jwt-token-here",
+            "type": "string"
+        }
+    ]
+}
+
