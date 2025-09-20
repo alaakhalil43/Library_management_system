@@ -19,6 +19,15 @@ This directory contains all visual assets for the Library Management System.
 - **Description**: Postman collection interface
 - **Usage**: Shows in README.md Screenshots section
 
+### 4. Additional Screenshots
+- **File**: `assets/screenshot1.png` - Additional application features
+- **File**: `assets/screenshot2.png` - More application screens
+- **File**: `assets/screenshot3.png` - Testing and development screenshots
+- **File**: `assets/screenshot4.png` - Application features and testing results
+- **File**: `assets/screenshot5.png` - System capabilities screenshots
+- **File**: `assets/screenshot6.png` - Application interfaces and testing
+- **File**: `assets/screenshot7.png` - System features demonstration
+
 ## 🎯 How to Add Images:
 
 1. **Save your images** with the exact filenames above
