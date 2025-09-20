@@ -56,10 +56,6 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - **BorrowingTransactions**: Book borrowing records
 - **UserActivityLogs**: User activity tracking
 
-### 📋 Database Documentation
-- **Complete ERD**: [docs/ERD.md](docs/ERD.md) - Detailed Entity Relationship Diagram
-- **Database Schema**: Visual representation of all tables and relationships
-- **Sample Data**: Pre-loaded data for testing all features
 
 ## 🚀 Quick Start
 
@@ -93,9 +89,11 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 
 ### Authentication
 - `POST /api/auth/login` - User login
-- `POST /api/auth/logout` - User logout
+- `POST /api/users` - create user with role 
 - `GET /api/auth/me` - Get current user
 - `GET /api/auth/status` - Check auth status
+- - `UPDATE api/users/3/role` - update user role by id
+- - `DELETE /api/users/2` - delete user by id
 
 ### Book Management
 - `GET /api/books` - Get all books
