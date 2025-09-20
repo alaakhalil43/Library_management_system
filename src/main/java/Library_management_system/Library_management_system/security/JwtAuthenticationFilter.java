@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import Library_management_system.Library_management_system.service.CustomUserDetailsService;
-import Library_management_system.Library_management_system.util.JwtUtil;
+import Library_management_system.Library_management_system.config.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

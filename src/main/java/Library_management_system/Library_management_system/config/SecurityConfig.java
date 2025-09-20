@@ -56,21 +56,21 @@ public class SecurityConfig {
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
                 
-                // Book endpoints - MEMBER can read, LIBRARIAN+ can manage
+
                 .requestMatchers("/api/books").hasAnyRole("MEMBER", "STAFF", "LIBRARIAN", "ADMINISTRATOR")
                 .requestMatchers("/api/books/**").hasAnyRole("MEMBER", "STAFF", "LIBRARIAN", "ADMINISTRATOR")
                 
-                // Author endpoints - MEMBER can read, LIBRARIAN+ can manage
+
                 .requestMatchers("/api/authors").hasAnyRole("MEMBER", "STAFF", "LIBRARIAN", "ADMINISTRATOR")
                 .requestMatchers("/api/authors/**").hasAnyRole("MEMBER", "STAFF", "LIBRARIAN", "ADMINISTRATOR")
                 
-                // Member endpoints - STAFF+ can manage (MEMBERS can't manage other members)
+
                 .requestMatchers("/api/members/**").hasAnyRole("STAFF", "LIBRARIAN", "ADMINISTRATOR")
                 
-                // Borrowing endpoints - MEMBER can view their own, STAFF+ can manage all
+
                 .requestMatchers("/api/borrowing/**").hasAnyRole("MEMBER", "STAFF", "LIBRARIAN", "ADMINISTRATOR")
                 
-                // Public endpoints (no authentication required)
+                // Public endpoints
                 .requestMatchers("/api/users/register").permitAll()
                 .requestMatchers("/api/users/available-roles").permitAll()
                 
@@ -83,7 +83,6 @@ public class SecurityConfig {
                 .requestMatchers("/api/activity-logs/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN")
 
 
-                // All other requests need authentication
                 .anyRequest().authenticated()
             )
             .headers(headers -> headers.frameOptions().disable()) // For H2 console

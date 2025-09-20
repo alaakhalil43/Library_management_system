@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import Library_management_system.Library_management_system.model.User;
 import Library_management_system.Library_management_system.security.TokenBlacklist;
 import Library_management_system.Library_management_system.service.UserService;
-import Library_management_system.Library_management_system.util.JwtUtil;
+import Library_management_system.Library_management_system.config.util.JwtUtil;
 
 @RestController
 @RequestMapping("/api/auth")

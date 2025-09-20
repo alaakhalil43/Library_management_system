@@ -1,10 +1,10 @@
--- Create roles table
+--  roles table
 CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name ENUM('STAFF', 'LIBRARIAN', 'ADMINISTRATOR' ,'MEMBER' ) NOT NULL UNIQUE
 );
 
--- Create users table
+-- users table
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -17,7 +17,7 @@ CREATE TABLE users (
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
--- Create authors table
+--  authors table
 CREATE TABLE authors (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE authors (
     biography VARCHAR(1000)
 );
 
--- Create categories table (hierarchical structure)
+--  categories table
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -34,20 +34,20 @@ CREATE TABLE categories (
     FOREIGN KEY (parent_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 
--- Create publishers table
+-- publishers table
 CREATE TABLE publishers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description VARCHAR(200)
 );
 
--- Create languages table
+-- languages table
 CREATE TABLE languages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
--- Create books table
+--  books table
 CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE books (
     FOREIGN KEY (language_id) REFERENCES languages(id) ON DELETE SET NULL
 );
 
--- Create book_authors junction table for many-to-many relationship
+-- book_authors table for many-to-many relationship
 CREATE TABLE book_authors (
     id INT AUTO_INCREMENT PRIMARY KEY,
     book_id INT NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE book_authors (
     FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE
 );
 
--- Create members table
+-- members table
 CREATE TABLE members (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE members (
     address VARCHAR(500)
 );
 
--- Create borrowing_transactions table
+--  borrowing_transactions table
 CREATE TABLE borrowing_transactions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     book_id INT NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE borrowing_transactions (
     FOREIGN KEY (borrowed_by) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Create user_activity_logs table
+--  user_activity_logs table
 CREATE TABLE user_activity_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,

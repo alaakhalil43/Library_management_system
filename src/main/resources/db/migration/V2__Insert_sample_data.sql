@@ -1,3 +1,6 @@
+
+-- insert random data for testing Endpoints
+
 -- Insert sample roles
 INSERT INTO roles (name) VALUES
 ('ADMINISTRATOR'),
