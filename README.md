@@ -1,4 +1,4 @@
-# Library Management System
+# 📚 Library Management System
 
 ## 🚀 Complete Spring Boot Application
 
@@ -34,6 +34,25 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - **Flyway**
 - **BCrypt Password Encoding**
 
+
+## 🗄️ Database Schema
+
+### Core Entities
+- **Users**: System users with roles
+- **Members**: Library members
+- **Books**: Book catalog with metadata
+- **Authors**: Book authors
+- **Categories**: Book categories
+- **Publishers**: Book publishers
+- **Languages**: Book languages
+- **BorrowingTransactions**: Book borrowing records
+- **UserActivityLogs**: User activity tracking
+
+### 📋 Database Documentation
+- **Complete ERD**: [docs/ERD.md](docs/ERD.md) - Detailed Entity Relationship Diagram
+- **Database Schema**: Visual representation of all tables and relationships
+- **Sample Data**: Pre-loaded data for testing all features
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -42,9 +61,10 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - Maven 3.6+
 
 ### Installation
+
 1. **Clone the repository**
    ```bash
-   git clone [repository-url]
+   git clone [`https://github.com/alaakhalil43/Library_management_system.git`]
    cd Library_management_system
    ```
 
@@ -95,38 +115,58 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 
 ## 🔐 Security & Permissions
 
-### Roles
-- **ADMINISTRATOR**: Full system access
-- **LIBRARIAN**: Book and member management
-- **STAFF**: Read-only access
-- **MEMBER**: Public user (read books only)
+### Roles & What They Can Do
+
+#### 🔴 ADMINISTRATOR (Full System Access)
+- ✅ **User Management**: Create, read, update, delete all users
+- ✅ **Role Management**: Assign and change user roles
+- ✅ **Book Management**: Full CRUD operations on books
+- ✅ **Member Management**: Full CRUD operations on members
+- ✅ **Author Management**: Full CRUD operations on authors
+- ✅ **Category Management**: Full CRUD operations on categories
+- ✅ **Publisher Management**: Full CRUD operations on publishers
+- ✅ **Language Management**: Full CRUD operations on languages
+- ✅ **Borrowing System**: Full access to all borrowing operations
+- ✅ **Activity Logs**: View all user activity logs
+- ✅ **System Configuration**: Access to all system settings
+
+#### 🟡 LIBRARIAN (Library Operations)
+- ✅ **Book Management**: Create, read, update, delete books
+- ✅ **Member Management**: Create, read, update, delete members
+- ✅ **Author Management**: Create, read, update, delete authors
+- ✅ **Category Management**: Create, read, update, delete categories
+- ✅ **Publisher Management**: Create, read, update, delete publishers
+- ✅ **Language Management**: Create, read, update, delete languages
+- ✅ **Borrowing System**: Borrow and return books, manage transactions
+- ✅ **Activity Logs**: View user activity logs
+- ❌ **User Management**: Cannot manage system users
+- ❌ **System Configuration**: No access to system settings
+
+#### 🟢 STAFF (Limited Operations)
+- ✅ **Book Management**: Read books only
+- ✅ **Member Management**: Create, read, update, delete members
+- ✅ **Author Management**: Create, read, update, delete authors
+- ✅ **Category Management**: Read categories only
+- ✅ **Publisher Management**: Read publishers only
+- ✅ **Language Management**: Read languages only
+- ✅ **Borrowing System**: View borrowing transactions
+- ❌ **User Management**: Cannot manage system users
+- ❌ **Book Creation**: Cannot create or update books
+- ❌ **Activity Logs**: No access to activity logs
+
+#### 🔵 MEMBER (Public User)
+- ✅ **Book Management**: Read and search books only
+- ✅ **Borrowing System**: View own borrowing history
+- ✅ **Public Registration**: Can register as new member
+- ❌ **All Management Operations**: Cannot manage any entities
+- ❌ **User Management**: Cannot access user management
+- ❌ **Activity Logs**: No access to activity logs
 
 ### Authentication
 - JWT-based stateless authentication
 - Password encryption using BCrypt
 - Token blacklisting for secure logout
 - Role-based endpoint protection
-
-
-## 📊 Database Schema
-
-### Core Entities
-- **Users**: System users with roles
-- **Members**: Library members
-- **Books**: Book catalog with metadata
-- **Authors**: Book authors
-- **Categories**: Book categories
-- **Publishers**: Book publishers
-- **Languages**: Book languages
-- **BorrowingTransactions**: Book borrowing records
-- **UserActivityLogs**: User activity tracking
-
-### 📋 Database Documentation
-- **Complete ERD**: [docs/ERD.md]![ERD.png](ERD.png) - Detailed Entity Relationship Diagram
-- **Database Schema**: Visual representation of all tables and relationships
-- **Sample Data**: Pre-loaded data for testing all features
-
-> **📊 ERD Image**: The ERD image will appear here once `docs/images/database_erd.png` is added to the repository.
 
 ## 🧪 Testing
 
@@ -166,45 +206,51 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - **Admin**: `admin` / `admin123`
 - **Librarian**: `librarian1` / `admin123`
 - **Staff**: `staff1` / `admin123`
-- Pre-configured requests with sample data
-- Environment variables for easy testing
-- Role-based test scenarios
 
-### Sample Data
-- Pre-loaded sample data for testing
-- Multiple users with different roles
-- Sample books, authors, and categories
-- Test borrowing transactions
+## 📊 Sample Data
+
+The database includes comprehensive sample data:
+
+- **4 System Roles** with different permission levels
+- **4 Sample Users** (one per role)
+- **10 Sample Books** with complete metadata
+- **5 Sample Authors** with biographies
+- **3 Book Categories** with hierarchical structure
+- **3 Publishers** with contact information
+- **2 Languages** (English, Arabic)
+- **5 Library Members** with different membership types
+- **Sample Borrowing Transactions** for testing
+- **User Activity Logs** for audit trails
 
 ## 🎯 What Makes This Special
 
-1. **Production-Ready Code**
-   - Proper error handling and validation
-   - Comprehensive logging
-   - Security best practices
+### 1. **Production-Ready Code**
+- Proper error handling and validation
+- Comprehensive logging
+- Security best practices
 
-2. **Scalable Architecture**
-   - Clean separation of concerns
-   - Modular design
-   - Easy to extend and maintain
+### 2. **Scalable Architecture**
+- Clean separation of concerns
+- Modular design
+- Easy to extend and maintain
 
-3. **Security-First Approach**
-   - JWT authentication
-   - Role-based access control
-   - Password encryption
-   - Input validation
+### 3. **Security-First Approach**
+- JWT authentication
+- Role-based access control
+- Password encryption
+- Input validation
 
-4. **Modern Java Practices**
-   - Spring Boot 3.x
-   - Latest Java features
-   - Clean code principles
-   - RESTful API design
+### 4. **Modern Java Practices**
+- Spring Boot 3.x
+- Latest Java features
+- Clean code principles
+- RESTful API design
 
-5. **Complete Documentation**
-   - Comprehensive README
-   - API documentation
-   - Database schema
-   - Setup instructions
+### 5. **Complete Documentation**
+- Comprehensive README
+- API documentation
+- Database schema
+- Setup instructions
 
 ## 📁 Project Structure
 
@@ -225,36 +271,21 @@ src/main/resources/
 
 ## 🚀 Getting Started with APIs
 
-1. **Login as Admin**
+ **Login as Admin**
    ```bash
    POST /api/auth/login
    {
      "username": "admin",
-     "password": "admin123"
+     "password": "admin"
    }
    ```
 
-2. **Create a Book**
-   ```bash
-   POST /api/books
-   Authorization: Bearer <token>
-   {
-     "title": "Java Programming",
-     "isbn": "978-1234567890",
-     "publicationYear": 2024,
-     "edition": "1st Edition",
-     "summary": "Complete guide to Java programming"
-   }
-   ```
 
-3. **Borrow a Book**
-   ```bash
-   POST /api/borrowing
-   Authorization: Bearer <token>
-   {
-     "bookId": 1,
-     "memberId": 1,
-     "dueDate": "2024-10-20"
-   }
-   ```
+## 🤝 Contributing
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 

@@ -11,7 +11,7 @@ INSERT INTO roles (name) VALUES
 -- Insert sample users with one-to-one role relationship and addresses
 -- Password for all users: admin123
 INSERT INTO users (username, email, password, first_name, last_name, address, role_id) VALUES
-('admin', 'admin@library.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', 'Admin', 'User', '123 Admin Street, Library City, LC 12345', 1),
+('admin', 'admin@library.com', '$2a$12$qpaA0Mq.C0R31uzqAGTdZOIuGuKDjV3Dji39Ndc24p5PQxXVyQ0bC', 'Admin', 'User', '123 Admin Street, Library City, LC 12345', 1),
 ('librarian1', 'librarian1@library.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', 'Jane', 'Smith', '456 Librarian Ave, Book Town, BT 67890', 2),
 ('staff1', 'staff1@library.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', 'John', 'Doe', '789 Staff Road, Reading City, RC 13579', 3),
 ('superuser', 'superuser@library.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVEFDi', 'Super', 'User', '321 Super Lane, Manager Town, MT 24680', 2);
