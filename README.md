@@ -72,10 +72,6 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - **BorrowingTransactions**: Complete borrowing records
 - **UserActivityLogs**: User activity audit trail
 
-### 📋 Database Documentation
-- **Complete ERD**: [docs/ERD.md](docs/ERD.md) - Detailed Entity Relationship Diagram
-- **Database Schema**: Visual representation of all tables and relationships
-- **Sample Data**: Pre-loaded data for testing all features
 
 ## 🚀 Quick Start
 
@@ -308,18 +304,3 @@ Library_management_system/
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Contact
-
-- **GitHub**: [alaakhalil43](https://github.com/alaakhalil43)
-- **Project Link**: [Library Management System](https://github.com/alaakhalil43/Library_management_system)
-
----
-
-**Built with ❤️ using Spring Boot and modern Java practices**
-
-**Ready for production deployment and manager review!** 🎉
