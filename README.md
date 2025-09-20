@@ -35,7 +35,8 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - **BCrypt Password Encoding**
 
 
-## 📊 Screenshots
+### 🔑 Default Credentials:
+- **Admin**: `admin` / `admin`
 
 ### Database Entity Relationship Diagram (ERD)
 
@@ -209,9 +210,8 @@ A production-ready Library Management System built with Java, Spring Boot, and M
    - All other requests will automatically use the token
 
 ### 🔑 Default Credentials:
-- **Admin**: `admin` / `admin123`
-- **Librarian**: `librarian1` / `admin123`
-- **Staff**: `staff1` / `admin123`
+- **Admin**: `admin` / `admin`
+
 
 ## 📊 Sample Data
 
