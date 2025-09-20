@@ -134,7 +134,41 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 ## 🧪 Testing
 
 ### Postman Collection
-- Complete API testing collection included
+- **Complete API testing collection included**
+- **50+ RESTful endpoints** with role-based permissions
+- **JWT Authentication** with token management
+- **Pre-configured requests** for all entities
+
+### 📥 How to Import Postman Collection:
+
+> **📖 Detailed Guide**: [POSTMAN_GUIDE.md](POSTMAN_GUIDE.md) - Complete step-by-step instructions
+
+1. **Download the Collection:**
+   - Click on `Library_management_system.postman_collection.json` in the repository
+   - Click the **"Raw"** button to view the raw JSON
+   - Copy all the content (Ctrl+A, Ctrl+C)
+
+2. **Import into Postman:**
+   - Open Postman application
+   - Click **"Import"** button (top left)
+   - Select **"Raw text"** tab
+   - Paste the copied JSON content
+   - Click **"Continue"** then **"Import"**
+
+3. **Set Environment Variables:**
+   - Create a new environment in Postman
+   - Add variable: `baseUrl` = `http://localhost:8095`
+   - Add variable: `token` = (leave empty, will be set after login)
+
+4. **Start Testing:**
+   - Use **"User Login"** request to get authentication token
+   - Copy the token from response and set it in the `token` variable
+   - All other requests will automatically use the token
+
+### 🔑 Default Credentials:
+- **Admin**: `admin` / `admin123`
+- **Librarian**: `librarian1` / `admin123`
+- **Staff**: `staff1` / `admin123`
 - Pre-configured requests with sample data
 - Environment variables for easy testing
 - Role-based test scenarios

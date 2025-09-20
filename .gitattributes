@@ -1,2 +1,11 @@
-/mvnw text eol=lf
-*.cmd text eol=crlf
+# Postman Collection
+*.postman_collection.json linguist-language=JSON
+*.json linguist-language=JSON
+
+# Documentation
+*.md linguist-language=Markdown
+
+# Images
+*.png linguist-language=Image
+*.jpg linguist-language=Image
+*.jpeg linguist-language=Image
