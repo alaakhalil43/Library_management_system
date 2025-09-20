@@ -27,7 +27,14 @@ git push origin master
 
 ## ❌ What You Need to Do:
 - ❌ Add `database_erd.png` to `docs/images/`
+- ❌ Add `app-screenshot.png` to `assets/`
+- ❌ Add `postman-screenshot.png` to `assets/`
 - ❌ Commit and push to GitHub
+
+## 📊 Required Images:
+1. **Database ERD**: `docs/images/database_erd.png`
+2. **App Screenshot**: `assets/app-screenshot.png`
+3. **Postman Screenshot**: `assets/postman-screenshot.png`
 
 ---
 

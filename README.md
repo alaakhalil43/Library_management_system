@@ -107,13 +107,27 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - Token blacklisting for secure logout
 - Role-based endpoint protection
 
-## 📊 Database Schema
+## 📊 Screenshots
 
-### Entity Relationship Diagram (ERD)
+### Database Entity Relationship Diagram (ERD)
 
 ![Database ERD](docs/images/database_erd.png)
 
 *Complete Entity Relationship Diagram showing all database tables and their relationships*
+
+### Application Features
+
+![Library Management System](assets/app-screenshot.png)
+
+*Main application interface showing book management and user dashboard*
+
+### API Testing with Postman
+
+![Postman Collection](assets/postman-screenshot.png)
+
+*Complete API testing collection with 50+ endpoints*
+
+## 📊 Database Schema
 
 ### Core Entities
 - **Users**: System users with roles
