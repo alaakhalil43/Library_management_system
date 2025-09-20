@@ -53,11 +53,7 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 
 *Complete Entity Relationship Diagram showing all database tables and their relationships*
 
-### API Testing with Postman
 
-![Postman Collection](assets/postman-screenshot.png)
-
-*Complete API testing collection with 50+ endpoints*
 
 ## 🗄️ Database Schema
 
