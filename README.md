@@ -141,7 +141,7 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - **UserActivityLogs**: User activity tracking
 
 ### 📋 Database Documentation
-- **Complete ERD**: [docs/ERD.md](docs/ERD.md) - Detailed Entity Relationship Diagram
+- **Complete ERD**: [docs/ERD.md]![ERD.png](ERD.png) - Detailed Entity Relationship Diagram
 - **Database Schema**: Visual representation of all tables and relationships
 - **Sample Data**: Pre-loaded data for testing all features
 
