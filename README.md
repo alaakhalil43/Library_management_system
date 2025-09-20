@@ -49,7 +49,7 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 
 ### Database Entity Relationship Diagram (ERD)
 
-![Database ERD](POSTMAN_GUIDE.md)
+![Database ERD](ERD.png)
 
 *Complete Entity Relationship Diagram showing all database tables and their relationships*
 
