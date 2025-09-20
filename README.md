@@ -131,6 +131,8 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - **Database Schema**: Visual representation of all tables and relationships
 - **Sample Data**: Pre-loaded data for testing all features
 
+> **📊 ERD Image**: The ERD image will appear here once `docs/images/database_erd.png` is added to the repository.
+
 ## 🧪 Testing
 
 ### Postman Collection
