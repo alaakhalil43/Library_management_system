@@ -109,6 +109,12 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 
 ## 📊 Database Schema
 
+### Entity Relationship Diagram (ERD)
+
+![Database ERD](docs/images/database_erd.png)
+
+*Complete Entity Relationship Diagram showing all database tables and their relationships*
+
 ### Core Entities
 - **Users**: System users with roles
 - **Members**: Library members

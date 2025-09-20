@@ -1,0 +1,1798 @@
+{
+	"info": {
+		"_postman_id": "ee356a5d-ab38-4a26-845b-b61fc8508c4a",
+		"name": "Library_management_system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30935433"
+	},
+	"item": [
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"Alaa_74\",\r\n  \"email\": \"alaakhalil498@email.com\",\r\n  \"password\": \"12456\",\r\n  \"firstName\": \"Alaa\",\r\n  \"lastName\": \"khalil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User Info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2MDczOCwiZXhwIjoxNzU4NDQ3MTM4fQ.-AiVDAUm7l45tKnhusF77WDdkIizZ_TgoIJfkESSKng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/auth/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check auth status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/auth/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"auth",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users((ADMINISTRATOR))",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM1ODk2NiwiZXhwIjoxNzU4NDQ1MzY2fQ.iNCy4dGAAlBbmD4msQEgt0FDii-gXCELwRK2OMRrpII",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user (ADMINISTRATOR)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM1ODk2NiwiZXhwIjoxNzU4NDQ1MzY2fQ.iNCy4dGAAlBbmD4msQEgt0FDii-gXCELwRK2OMRrpII",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user with role (ADMINISTRATOR)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2MTMwMiwiZXhwIjoxNzU4NDQ3NzAyfQ.XRymJCUB6QfxB4ybZWUqmKGstF6hJceNlegTmAkMfUg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Ahmsed\",\r\n  \"lastName\": \"Ali\",\r\n  \"username\": \"ahmed_ali\",\r\n  \"email\": \"ahmsed@example.com\",\r\n  \"password\": \"password123\",\r\n  \"role\": {\r\n    \"id\": 2,\r\n    \"name\": \"LIBRARIAN\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updata role (ADMINISTRATOR)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NTkxNiwiZXhwIjoxNzU4NDUyMzE2fQ.t05ift42UOlBEFqU2loc1gVfsuN5T4YK5DF8uDME3K8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"roleId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/users/3/role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"users",
+								"3",
+								"role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book Management",
+			"item": [
+				{
+					"name": "get all books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbGFhXzc0IiwiaWF0IjoxNzU4MzU5Mzg0LCJleHAiOjE3NTg0NDU3ODR9.JiQDNq2gbSA6Tf9aHDtrTdGJo8NLYM3uMK-aHR8M9i0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get book by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbGFhXzc0IiwiaWF0IjoxNzU4MzU5Mzg0LCJleHAiOjE3NTg0NDU3ODR9.JiQDNq2gbSA6Tf9aHDtrTdGJo8NLYM3uMK-aHR8M9i0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/books/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get book by isbn",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbGFhXzc0IiwiaWF0IjoxNzU4MzU5Mzg0LCJleHAiOjE3NTg0NDU3ODR9.JiQDNq2gbSA6Tf9aHDtrTdGJo8NLYM3uMK-aHR8M9i0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/books/isbn/978-0747532699",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"books",
+								"isbn",
+								"978-0747532699"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get books by language id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbGFhXzc0IiwiaWF0IjoxNzU4MzU5Mzg0LCJleHAiOjE3NTg0NDU3ODR9.JiQDNq2gbSA6Tf9aHDtrTdGJo8NLYM3uMK-aHR8M9i0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/books/language/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"books",
+								"language",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create book(LIBRARIAN, ADMINISTRATOR )",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2MDMxMywiZXhwIjoxNzU4NDQ2NzEzfQ.CrIHUoGpintlMtMETjGYXL3z3kvpQWoppJKNc8qO24Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Java Programming\",\r\n  \"isbn\": \"978-1234567890\",\r\n  \"publicationYear\": 2024,\r\n  \"edition\": \"3rd Edition\",\r\n  \"summary\": \"Complete guide to Java programming\",\r\n  \"coverImageUrl\": \"https://example.com/cover.jpg\",\r\n  \"category\": {\r\n    \"id\": 1\r\n  },\r\n  \"publisher\": {\r\n    \"id\": 1\r\n  },\r\n  \"language\": {\r\n    \"id\": 1\r\n  },\r\n  \"authors\": [\r\n    {\r\n      \"id\": 1\r\n    },\r\n    {\r\n      \"id\": 2\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updata book(LIBRARIAN, ADMINISTRATOR )",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2MTEzNiwiZXhwIjoxNzU4NDQ3NTM2fQ.UWs7lhlGM2lLC4qnzZ7MGtZIwPUHtbDZEwHAwSzY5t4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Advanced Java Programming\",\r\n  \"isbn\": \"978-1234567890\",\r\n  \"publicationYear\": 2024,\r\n  \"edition\": \"4th Edition\",\r\n  \"summary\": \"Updated guide to Java programming\",\r\n  \"coverImageUrl\": \"https://example.com/new-cover.jpg\",\r\n  \"category\": {\r\n    \"id\": 1\r\n  },\r\n  \"publisher\": {\r\n    \"id\": 1\r\n  },\r\n  \"language\": {\r\n    \"id\": 1\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/books/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"books",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete book (LIBRARIAN, ADMINISTRATOR )",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2MTMwMiwiZXhwIjoxNzU4NDQ3NzAyfQ.XRymJCUB6QfxB4ybZWUqmKGstF6hJceNlegTmAkMfUg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Advanced Java Programming\",\r\n  \"isbn\": \"978-1234567890\",\r\n  \"publicationYear\": 2024,\r\n  \"edition\": \"4th Edition\",\r\n  \"summary\": \"Updated guide to Java programming\",\r\n  \"coverImageUrl\": \"https://example.com/new-cover.jpg\",\r\n  \"category\": {\r\n    \"id\": 1\r\n  },\r\n  \"publisher\": {\r\n    \"id\": 1\r\n  },\r\n  \"language\": {\r\n    \"id\": 1\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/books/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"books",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Member Management",
+			"item": [
+				{
+					"name": "get all members(ADMINISTRATOR ,LIBRARIAN\t,STAFF)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NTkxNiwiZXhwIjoxNzU4NDUyMzE2fQ.t05ift42UOlBEFqU2loc1gVfsuN5T4YK5DF8uDME3K8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/members",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get member by id(ADMINISTRATOR ,LIBRARIAN,STAFF)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NTkxNiwiZXhwIjoxNzU4NDUyMzE2fQ.t05ift42UOlBEFqU2loc1gVfsuN5T4YK5DF8uDME3K8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/members/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create member(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NTkxNiwiZXhwIjoxNzU4NDUyMzE2fQ.t05ift42UOlBEFqU2loc1gVfsuN5T4YK5DF8uDME3K8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Ahmed\",\r\n  \"lastName\": \"Ali\",\r\n  \"email\": \"ahmed.ali@email.com\",\r\n  \"phone\": \"01234567890\",\r\n  \"address\": \"123 Main Street, Cairo, Egypt\",\r\n  \"membershipNumber\": \"MEM001\",\r\n  \"membershipType\": \"REGULAR\",\r\n  \"joinDate\": \"2024-01-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/members",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update member(ADMINISTRATOR ,LIBRARIAN\t)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NTkxNiwiZXhwIjoxNzU4NDUyMzE2fQ.t05ift42UOlBEFqU2loc1gVfsuN5T4YK5DF8uDME3K8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Ahmed\",\r\n  \"lastName\": \"Ali\",\r\n  \"email\": \"ahmed.ali@email.com\",\r\n  \"phone\": \"01234567890\",\r\n  \"address\": \"456 New Street, Cairo, Egypt\",\r\n  \"membershipNumber\": \"MEM001\",\r\n  \"membershipType\": \"PREMIUM\",\r\n  \"joinDate\": \"2024-01-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/members/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete member(ADMINISTRATOR ,LIBRARIAN\t)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NTkxNiwiZXhwIjoxNzU4NDUyMzE2fQ.t05ift42UOlBEFqU2loc1gVfsuN5T4YK5DF8uDME3K8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Ahmed\",\r\n  \"lastName\": \"Ali\",\r\n  \"email\": \"ahmed.ali@email.com\",\r\n  \"phone\": \"01234567890\",\r\n  \"address\": \"456 New Street, Cairo, Egypt\",\r\n  \"membershipNumber\": \"MEM001\",\r\n  \"membershipType\": \"PREMIUM\",\r\n  \"joinDate\": \"2024-01-15\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/members/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"members",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Members by Name((ADMINISTRATOR ,LIBRARIAN,STAFF))",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NTkxNiwiZXhwIjoxNzU4NDUyMzE2fQ.t05ift42UOlBEFqU2loc1gVfsuN5T4YK5DF8uDME3K8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/members/search?name=Ahmed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"members",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Ahmed"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Borrowing Transaction",
+			"item": [
+				{
+					"name": "get all transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/borrowing",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"borrowing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transactions by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/borrowing/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"borrowing",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transaction by memberId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/borrowing/member/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"borrowing",
+								"member",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book's Transactions",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transactions by Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/borrowing/status/BORROWED",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"borrowing",
+								"status",
+								"BORROWED"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrow a Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"memberId\": 1,\r\n  \"bookId\": 1,\r\n  \"borrowDate\": \"2024-09-20\",\r\n  \"dueDate\": \"2024-10-20\",\r\n  \"status\": \"BORROWED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/borrowing",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"borrowing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updata transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"memberId\": 1,\r\n  \"bookId\": 1,\r\n  \"borrowDate\": \"2024-09-20\",\r\n  \"dueDate\": \"2024-10-20\",\r\n  \"returnDate\": \"2024-09-25\",\r\n  \"status\": \"RETURNED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/borrowing/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"borrowing",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete transaction",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/borrowing/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"borrowing",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "authors",
+			"item": [
+				{
+					"name": "get authors",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2Njg4MCwiZXhwIjoxNzU4NDUzMjgwfQ.Tw4hLQtOlbxQRm8AL7mZ6fqIz5IwW6PQ48r3E4DMtnw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get author by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2Njg4MCwiZXhwIjoxNzU4NDUzMjgwfQ.Tw4hLQtOlbxQRm8AL7mZ6fqIz5IwW6PQ48r3E4DMtnw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/authors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create author(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \r\n        \"firstName\": \"ahmed\",\r\n        \"lastName\": \"ahmed\",\r\n        \"biography\": \"British author best known for writing the Harry Potter fantasy series. The books have won multiple awards and sold more than 500 million copies worldwide.\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update author(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Ahmed\",\r\n  \"lastName\": \"Mostafa\",\r\n  \"biography\": \"Renowned Egyptian author and novelist\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/authors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete author(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Ahmed\",\r\n  \"lastName\": \"Mostafa\",\r\n  \"biography\": \"Renowned Egyptian author and novelist\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/authors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "get all categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create category(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Science Fiction\",\r\n  \"description\": \"Books about science fiction and fantasy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update category (ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Science Fiction\",\r\n  \"description\": \"Updated description for science fiction books\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/categories/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"categories",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete category(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Science Fiction\",\r\n  \"description\": \"Books about science fiction and fantasy\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "languages",
+			"item": [
+				{
+					"name": "get all language",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/languages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"languages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create language(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Arabic\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/languages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"languages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update language(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Arabic\"\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/languages/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"languages",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete language(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Arabic\"\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/languages/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"languages",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "publishers",
+			"item": [
+				{
+					"name": "get all publishers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/publishers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"publishers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create publisher(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Oxford University Press\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/publishers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"publishers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updata publisher(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Oxford University Press\",\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/publishers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"publishers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete publisher (ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Oxford University Press\",\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8095/api/publishers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"publishers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user activity",
+			"item": [
+				{
+					"name": "get all user activity(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/activity-logs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"activity-logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get recent -las 50 (ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/activity-logs/recent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"activity-logs",
+								"recent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logs by User(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/activity-logs/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"activity-logs",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Activity Count(ADMINISTRATOR ,LIBRARIAN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1ODM2NzMwMCwiZXhwIjoxNzU4NDUzNzAwfQ.f97-t3Xtw0PSJmktUXj302vtVHnPCDYIYyAzmMYIK1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8095/api/activity-logs/count/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8095",
+							"path": [
+								"api",
+								"activity-logs",
+								"count",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
