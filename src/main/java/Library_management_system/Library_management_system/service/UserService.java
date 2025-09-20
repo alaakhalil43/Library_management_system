@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import Library_management_system.Library_management_system.model.Role;
 import Library_management_system.Library_management_system.model.User;
+import Library_management_system.Library_management_system.repository.RoleRepository;
 import Library_management_system.Library_management_system.repository.UserRepository;
 
 @Service
@@ -17,6 +18,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     
+    @Autowired
+    private RoleRepository roleRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
     
@@ -97,6 +101,28 @@ public class UserService {
         
         userRepository.delete(user);
         return true;
+    }
+    
+    public User updateUserRole(Integer userId, Integer roleId, String roleName) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return null;
+        }
+        
+        Role newRole = null;
+        
+        if (roleId != null) {
+            newRole = roleRepository.findById(roleId).orElse(null);
+        } else if (roleName != null) {
+            newRole = roleRepository.findByName(roleName).orElse(null);
+        }
+        
+        if (newRole == null) {
+            return null;
+        }
+        
+        user.setRole(newRole);
+        return userRepository.save(user);
     }
     
     // Get available roles for registration (only MEMBER role for public registration)

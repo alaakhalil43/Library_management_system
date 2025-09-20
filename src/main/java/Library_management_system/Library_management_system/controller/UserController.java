@@ -1,11 +1,12 @@
 package Library_management_system.Library_management_system.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,31 +31,26 @@ public class UserController {
     
     // إدارة المستخدمين - ADMINISTRATOR فقط
     @GetMapping
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
     
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public User getUserById(@PathVariable Integer id) {
         return userService.getUserById(id);
     }
     
     @GetMapping("/username/{username}")
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public User getUserByUsername(@PathVariable String username) {
         return userService.getUserByUsername(username);
     }
     
     @GetMapping("/role/{roleId}")
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public List<User> getUsersByRoleId(@PathVariable Integer roleId) {
         return userService.getUsersByRoleId(roleId);
     }
     
     @PostMapping
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User createdUser = userService.saveUser(user);
         if (createdUser != null) {
@@ -96,7 +92,6 @@ public class UserController {
     }
     
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User userDetails) {
         User updatedUser = userService.updateUser(id, userDetails);
         if (updatedUser != null) {
@@ -107,13 +102,48 @@ public class UserController {
     }
     
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
         boolean deleted = userService.deleteUser(id);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    // تحديث role للمستخدم - ADMINISTRATOR فقط
+    @PutMapping("/{id}/role")
+    public ResponseEntity<Map<String, Object>> updateUserRole(@PathVariable Integer id, @RequestBody Map<String, Object> request) {
+        try {
+            Integer roleId = (Integer) request.get("roleId");
+            String roleName = (String) request.get("roleName");
+            
+            if (roleId == null && roleName == null) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("success", false);
+                response.put("message", "Either roleId or roleName must be provided");
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            }
+            
+            User updatedUser = userService.updateUserRole(id, roleId, roleName);
+            
+            if (updatedUser != null) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("success", true);
+                response.put("message", "User role updated successfully");
+                response.put("user", updatedUser);
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            } else {
+                Map<String, Object> response = new HashMap<>();
+                response.put("success", false);
+                response.put("message", "User not found or role not found");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "Error updating user role: " + e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

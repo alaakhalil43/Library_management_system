@@ -60,11 +60,13 @@ public class User implements UserDetails {
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        if (role != null && role.getName() != null) {
+            return List.of(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_MEMBER"));
     }
     
     @Override
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
