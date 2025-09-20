@@ -121,42 +121,6 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 
 *Main application interface showing book management and user dashboard*
 
-### API Testing with Postman
-
-![Postman Collection](assets/postman-screenshot.png)
-
-*Complete API testing collection with 50+ endpoints*
-
-### Additional Screenshots
-
-![Additional Screenshot 1](assets/screenshot1.png)
-
-*Additional application features and functionality*
-
-![Additional Screenshot 2](assets/screenshot2.png)
-
-*More application screens and interfaces*
-
-![Additional Screenshot 3](assets/screenshot3.png)
-
-*Additional testing and development screenshots*
-
-![Additional Screenshot 4](assets/screenshot4.png)
-
-*More application features and testing results*
-
-![Additional Screenshot 5](assets/screenshot5.png)
-
-*Additional screenshots showing system capabilities*
-
-![Additional Screenshot 6](assets/screenshot6.png)
-
-*More application interfaces and testing*
-
-![Additional Screenshot 7](assets/screenshot7.png)
-
-*Additional screenshots demonstrating system features*
-
 ## 📊 Database Schema
 
 ### Core Entities
