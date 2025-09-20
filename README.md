@@ -120,6 +120,11 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - **BorrowingTransactions**: Book borrowing records
 - **UserActivityLogs**: User activity tracking
 
+### 📋 Database Documentation
+- **Complete ERD**: [docs/ERD.md](docs/ERD.md) - Detailed Entity Relationship Diagram
+- **Database Schema**: Visual representation of all tables and relationships
+- **Sample Data**: Pre-loaded data for testing all features
+
 ## 🧪 Testing
 
 ### Postman Collection
@@ -216,12 +221,3 @@ src/main/resources/
    }
    ```
 
-## 📞 Contact
-
-For questions or support, please contact:
-- **Email**: [your-email]
-- **GitHub**: [your-github-profile]
-
----
-
-**Built with ❤️ using Spring Boot and modern Java practices**
