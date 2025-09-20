@@ -35,6 +35,14 @@ A production-ready Library Management System built with Java, Spring Boot, and M
 - **BCrypt Password Encoding**
 
 
+## 📊 Screenshots
+
+### Database Entity Relationship Diagram (ERD)
+
+![Database ERD](docs/images/database_erd.png)
+
+*Complete Entity Relationship Diagram showing all database tables and their relationships*
+
 ## 🗄️ Database Schema
 
 ### Core Entities
