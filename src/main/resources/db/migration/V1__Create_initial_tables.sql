@@ -1,7 +1,7 @@
 -- Create roles table
 CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name ENUM('STAFF', 'LIBRARIAN', 'ADMINISTRATOR') NOT NULL UNIQUE
+    name ENUM('STAFF', 'LIBRARIAN', 'ADMINISTRATOR' ,'MEMBER' ) NOT NULL UNIQUE
 );
 
 -- Create users table

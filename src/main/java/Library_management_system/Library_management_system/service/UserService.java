@@ -2,9 +2,9 @@ package Library_management_system.Library_management_system.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import Library_management_system.Library_management_system.model.Role;
@@ -17,32 +17,23 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
     
     public User getUserById(Integer id) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            return user.get();
-        }
-        return null;
+        return userRepository.findById(id).orElse(null);
     }
     
     public User getUserByUsername(String username) {
-        Optional<User> user = userRepository.findByUsername(username);
-        if (user.isPresent()) {
-            return user.get();
-        }
-        return null;
+        return userRepository.findByUsername(username).orElse(null);
     }
     
     public User getUserByEmail(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
-        if (user.isPresent()) {
-            return user.get();
-        }
-        return null;
+        return userRepository.findByEmail(email).orElse(null);
     }
     
     public List<User> searchUsers(String searchTerm) {
@@ -60,6 +51,12 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             return null; // Email already exists
         }
+        
+        // Encode password before saving
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        
         return userRepository.save(user);
     }
     
@@ -81,6 +78,7 @@ public class UserService {
             return null; // Email already exists
         }
         
+        // Update user fields
         user.setUsername(userDetails.getUsername());
         user.setEmail(userDetails.getEmail());
         user.setPassword(userDetails.getPassword());
@@ -101,13 +99,13 @@ public class UserService {
         return true;
     }
     
-    // Get available roles for registration (only STAFF role for public registration)
+    // Get available roles for registration (only MEMBER role for public registration)
     public List<Role> getAvailableRolesForRegistration() {
         List<Role> roles = new ArrayList<>();
-        Role staffRole = new Role();
-        staffRole.setId(3);
-        staffRole.setName("STAFF");
-        roles.add(staffRole);
+        Role memberRole = new Role();
+        memberRole.setId(4);
+        memberRole.setName("MEMBER");
+        roles.add(memberRole);
         return roles;
     }
 }

@@ -19,13 +19,8 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     
     List<Book> findByAvailableCopiesGreaterThan(int copies);
     
-    @Query("SELECT DISTINCT b FROM Book b LEFT JOIN b.authors a WHERE b.title LIKE %:searchTerm% OR b.isbn LIKE %:searchTerm% OR a.firstName LIKE %:searchTerm% OR a.lastName LIKE %:searchTerm%")
-    List<Book> findByTitleOrIsbnOrAuthorContaining(@Param("searchTerm") String searchTerm);
-    
     List<Book> findByLanguageId(Integer languageId);
     
-    List<Book> findByEditionContainingIgnoreCase(String edition);
-    
-    @Query("SELECT b FROM Book b WHERE b.summary LIKE %:searchTerm%")
-    List<Book> findBySummaryContaining(@Param("searchTerm") String searchTerm);
+    @Query("SELECT DISTINCT b FROM Book b LEFT JOIN b.authors a WHERE b.title LIKE %:searchTerm% OR b.isbn LIKE %:searchTerm% OR a.firstName LIKE %:searchTerm% OR a.lastName LIKE %:searchTerm%")
+    List<Book> findByTitleOrIsbnOrAuthorContaining(@Param("searchTerm") String searchTerm);
 }

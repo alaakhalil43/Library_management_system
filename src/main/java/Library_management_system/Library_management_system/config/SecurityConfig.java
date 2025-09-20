@@ -13,11 +13,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -42,13 +37,13 @@ public class SecurityConfig {
     
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
+        AuthenticationManager authManager = config.getAuthenticationManager();
+        return authManager;
     }
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable())
+        http.csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 // Public endpoints
@@ -56,17 +51,19 @@ public class SecurityConfig {
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
                 
-                // Book endpoints - different permissions based on role
-                .requestMatchers("/api/books/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN", "STAFF")
+                // Book endpoints - MEMBER can read, LIBRARIAN+ can manage
+                .requestMatchers("/api/books").hasAnyRole("MEMBER", "STAFF", "LIBRARIAN", "ADMINISTRATOR")
+                .requestMatchers("/api/books/**").hasAnyRole("MEMBER", "STAFF", "LIBRARIAN", "ADMINISTRATOR")
                 
-                // Author endpoints - different permissions based on role
-                .requestMatchers("/api/authors/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN", "STAFF")
+                // Author endpoints - MEMBER can read, LIBRARIAN+ can manage
+                .requestMatchers("/api/authors").hasAnyRole("MEMBER", "STAFF", "LIBRARIAN", "ADMINISTRATOR")
+                .requestMatchers("/api/authors/**").hasAnyRole("MEMBER", "STAFF", "LIBRARIAN", "ADMINISTRATOR")
                 
-                // Member endpoints - different permissions based on role
-                .requestMatchers("/api/members/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN", "STAFF")
+                // Member endpoints - STAFF+ can manage (MEMBERS can't manage other members)
+                .requestMatchers("/api/members/**").hasAnyRole("STAFF", "LIBRARIAN", "ADMINISTRATOR")
                 
-                // Borrowing endpoints - different permissions based on role
-                .requestMatchers("/api/borrowing/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN", "STAFF")
+                // Borrowing endpoints - MEMBER can view their own, STAFF+ can manage all
+                .requestMatchers("/api/borrowing/**").hasAnyRole("MEMBER", "STAFF", "LIBRARIAN", "ADMINISTRATOR")
                 
                 // Public endpoints (no authentication required)
                 .requestMatchers("/api/users/register").permitAll()
@@ -74,12 +71,13 @@ public class SecurityConfig {
                 
                 // Admin only endpoints
                 .requestMatchers("/api/admin/**").hasRole("ADMINISTRATOR")
-                .requestMatchers("/api/users/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN")
+                .requestMatchers("/api/users/**").hasRole("ADMINISTRATOR")
                 .requestMatchers("/api/roles/**").hasRole("ADMINISTRATOR")
                 
                 // Activity logs endpoints - Admin/Librarian only
                 .requestMatchers("/api/activity-logs/**").hasAnyRole("ADMINISTRATOR", "LIBRARIAN")
-                
+
+
                 // All other requests need authentication
                 .anyRequest().authenticated()
             )
@@ -89,16 +87,4 @@ public class SecurityConfig {
         return http.build();
     }
     
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
-        
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
 }

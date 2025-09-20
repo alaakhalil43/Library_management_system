@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,41 +29,25 @@ public class AuthorController {
     private AuthorService authorService;
     
     @GetMapping
+    @PreAuthorize("hasAnyRole('MEMBER', 'STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public List<Author> getAllAuthors() {
         return authorService.getAllAuthors();
     }
     
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('MEMBER', 'STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public Author getAuthorById(@PathVariable Integer id) {
         return authorService.getAuthorById(id);
     }
     
-    @GetMapping("/first-name")
-    public List<Author> getAuthorsByFirstName(@RequestParam String firstName) {
-        return authorService.getAuthorsByFirstName(firstName);
-    }
-    
-    @GetMapping("/last-name")
-    public List<Author> getAuthorsByLastName(@RequestParam String lastName) {
-        return authorService.getAuthorsByLastName(lastName);
-    }
-    
-    @GetMapping("/full-name")
-    public List<Author> getAuthorsByFullName(@RequestParam String name) {
-        return authorService.getAuthorsByFullName(name);
-    }
-    
     @GetMapping("/search")
+    @PreAuthorize("hasAnyRole('MEMBER', 'STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public List<Author> searchAuthors(@RequestParam String q) {
         return authorService.searchAuthors(q);
     }
     
-    @GetMapping("/biography")
-    public List<Author> searchAuthorsByBiography(@RequestParam String biography) {
-        return authorService.searchAuthorsByBiography(biography);
-    }
-    
     @PostMapping
+    @PreAuthorize("hasAnyRole('LIBRARIAN', 'ADMINISTRATOR')")
     public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
         Author createdAuthor = authorService.saveAuthor(author);
         if (createdAuthor != null) {
@@ -73,6 +58,7 @@ public class AuthorController {
     }
     
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('LIBRARIAN', 'ADMINISTRATOR')")
     public ResponseEntity<Author> updateAuthor(@PathVariable Integer id, @RequestBody Author authorDetails) {
         Author updatedAuthor = authorService.updateAuthor(id, authorDetails);
         if (updatedAuthor != null) {
@@ -83,6 +69,7 @@ public class AuthorController {
     }
     
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<Void> deleteAuthor(@PathVariable Integer id) {
         boolean deleted = authorService.deleteAuthor(id);
         if (deleted) {

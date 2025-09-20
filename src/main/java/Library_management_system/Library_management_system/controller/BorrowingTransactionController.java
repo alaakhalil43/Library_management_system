@@ -3,6 +3,7 @@ package Library_management_system.Library_management_system.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,52 +23,54 @@ public class BorrowingTransactionController {
     @Autowired
     private BorrowingTransactionService borrowingTransactionService;
     
-    // Get all transactions
+    // قراءة فقط - STAFF+ يمكنهم القراءة
     @GetMapping
+    @PreAuthorize("hasAnyRole('STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public List<BorrowingTransaction> getAllTransactions() {
         return borrowingTransactionService.getAllTransactions();
     }
     
-    // Get transaction by ID
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public BorrowingTransaction getTransactionById(@PathVariable Integer id) {
         return borrowingTransactionService.getTransactionById(id);
     }
     
-    // Get transactions by member
     @GetMapping("/member/{memberId}")
+    @PreAuthorize("hasAnyRole('STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public List<BorrowingTransaction> getTransactionsByMember(@PathVariable Integer memberId) {
         return borrowingTransactionService.getTransactionsByMember(memberId);
     }
     
-    // Get transactions by book
     @GetMapping("/book/{bookId}")
+    @PreAuthorize("hasAnyRole('STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public List<BorrowingTransaction> getTransactionsByBook(@PathVariable Integer bookId) {
         return borrowingTransactionService.getTransactionsByBook(bookId);
     }
     
-    // Get transactions by status
     @GetMapping("/status/{status}")
+    @PreAuthorize("hasAnyRole('STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public List<BorrowingTransaction> getTransactionsByStatus(@PathVariable String status) {
         BorrowingTransaction.TransactionStatus transactionStatus = 
             BorrowingTransaction.TransactionStatus.valueOf(status.toUpperCase());
         return borrowingTransactionService.getTransactionsByStatus(transactionStatus);
     }
     
-    // Create transaction
+    // إدارة المعاملات - LIBRARIAN+ فقط
     @PostMapping
+    @PreAuthorize("hasAnyRole('LIBRARIAN', 'ADMINISTRATOR')")
     public BorrowingTransaction createTransaction(@RequestBody BorrowingTransaction transaction) {
         return borrowingTransactionService.saveTransaction(transaction);
     }
     
-    // Update transaction
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('LIBRARIAN', 'ADMINISTRATOR')")
     public BorrowingTransaction updateTransaction(@PathVariable Integer id, @RequestBody BorrowingTransaction transactionDetails) {
         return borrowingTransactionService.updateTransaction(id, transactionDetails);
     }
     
-    // Delete transaction
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public boolean deleteTransaction(@PathVariable Integer id) {
         return borrowingTransactionService.deleteTransaction(id);
     }

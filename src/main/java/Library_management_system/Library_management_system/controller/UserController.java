@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,28 +28,33 @@ public class UserController {
     @Autowired
     private UserService userService;
     
+    // إدارة المستخدمين - ADMINISTRATOR فقط
     @GetMapping
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
     
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public User getUserById(@PathVariable Integer id) {
         return userService.getUserById(id);
     }
     
     @GetMapping("/username/{username}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public User getUserByUsername(@PathVariable String username) {
         return userService.getUserByUsername(username);
     }
     
     @GetMapping("/role/{roleId}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public List<User> getUsersByRoleId(@PathVariable Integer roleId) {
         return userService.getUsersByRoleId(roleId);
     }
     
-    
     @PostMapping
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User createdUser = userService.saveUser(user);
         if (createdUser != null) {
@@ -61,11 +67,16 @@ public class UserController {
     // Register endpoint - لا يحتاج authentication
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
-        // تحديد Role افتراضي (STAFF) إذا لم يتم تحديده
+        // Generate username if not provided
+        if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
+            String generatedUsername = user.getFirstName().toLowerCase() + "_" + System.currentTimeMillis();
+            user.setUsername(generatedUsername);
+        }
+        // تحديد Role افتراضي (MEMBER) إذا لم يتم تحديده
         if (user.getRole() == null) {
             Role defaultRole = new Role();
-            defaultRole.setId(3); // STAFF role
-            defaultRole.setName("STAFF");
+            defaultRole.setId(4); // MEMBER role (id=4)
+            defaultRole.setName("MEMBER");
             user.setRole(defaultRole);
         }
         
@@ -85,6 +96,7 @@ public class UserController {
     }
     
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User userDetails) {
         User updatedUser = userService.updateUser(id, userDetails);
         if (updatedUser != null) {
@@ -95,6 +107,7 @@ public class UserController {
     }
     
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
         boolean deleted = userService.deleteUser(id);
         if (deleted) {

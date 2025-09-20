@@ -1,7 +1,6 @@
 package Library_management_system.Library_management_system.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -35,19 +34,15 @@ public class BookService {
     }
     
     public Book getBookById(Integer id) {
-        Optional<Book> book = bookRepository.findById(id);
-        if (book.isPresent()) {
-            return book.get();
-        }
-        return null;
+        return bookRepository.findById(id).orElse(null);
     }
     
     public Book getBookByIsbn(String isbn) {
-        Optional<Book> book = bookRepository.findByIsbn(isbn);
-        if (book.isPresent()) {
-            return book.get();
-        }
-        return null;
+        return bookRepository.findByIsbn(isbn).orElse(null);
+    }
+    
+    public List<Book> getBooksByLanguageId(Integer languageId) {
+        return bookRepository.findByLanguageId(languageId);
     }
     
     public List<Book> searchBooks(String searchTerm) {
@@ -56,18 +51,6 @@ public class BookService {
     
     public List<Book> getAvailableBooks() {
         return bookRepository.findByAvailableCopiesGreaterThan(0);
-    }
-    
-    public List<Book> getBooksByLanguageId(Integer languageId) {
-        return bookRepository.findByLanguageId(languageId);
-    }
-    
-    public List<Book> getBooksByEdition(String edition) {
-        return bookRepository.findByEditionContainingIgnoreCase(edition);
-    }
-    
-    public List<Book> searchBooksBySummary(String searchTerm) {
-        return bookRepository.findBySummaryContaining(searchTerm);
     }
     
     public Book saveBook(Book book) {

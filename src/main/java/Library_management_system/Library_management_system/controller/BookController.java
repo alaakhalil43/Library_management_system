@@ -28,59 +28,47 @@ public class BookController {
     @Autowired
     private BookService bookService;
     
-    // جميع المستخدمين يمكنهم القراءة
+    // جميع المستخدمين يمكنهم القراءة (بما في ذلك MEMBER)
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'LIBRARIAN', 'STAFF')")
+    @PreAuthorize("hasAnyRole('MEMBER', 'STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
     
     @GetMapping("/available")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'LIBRARIAN', 'STAFF')")
+    @PreAuthorize("hasAnyRole('MEMBER', 'STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public List<Book> getAvailableBooks() {
         return bookService.getAvailableBooks();
     }
     
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'LIBRARIAN', 'STAFF')")
+    @PreAuthorize("hasAnyRole('MEMBER', 'STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public Book getBookById(@PathVariable Integer id) {
         return bookService.getBookById(id);
     }
     
     @GetMapping("/isbn/{isbn}")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'LIBRARIAN', 'STAFF')")
+    @PreAuthorize("hasAnyRole('MEMBER', 'STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public Book getBookByIsbn(@PathVariable String isbn) {
         return bookService.getBookByIsbn(isbn);
     }
     
-    // البحث - جميع المستخدمين
-    @GetMapping("/search")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'LIBRARIAN', 'STAFF')")
-    public List<Book> searchBooks(@RequestParam String q) {
-        return bookService.searchBooks(q);
-    }
-    
     @GetMapping("/language/{languageId}")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'LIBRARIAN', 'STAFF')")
+    @PreAuthorize("hasAnyRole('MEMBER', 'STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
     public List<Book> getBooksByLanguageId(@PathVariable Integer languageId) {
         return bookService.getBooksByLanguageId(languageId);
     }
     
-    @GetMapping("/edition")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'LIBRARIAN', 'STAFF')")
-    public List<Book> getBooksByEdition(@RequestParam String edition) {
-        return bookService.getBooksByEdition(edition);
+    // البحث - جميع المستخدمين (بما في ذلك MEMBER)
+    @GetMapping("/search")
+    @PreAuthorize("hasAnyRole('MEMBER', 'STAFF', 'LIBRARIAN', 'ADMINISTRATOR')")
+    public List<Book> searchBooks(@RequestParam String q) {
+        return bookService.searchBooks(q);
     }
     
-    @GetMapping("/search-summary")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'LIBRARIAN', 'STAFF')")
-    public List<Book> searchBooksBySummary(@RequestParam String q) {
-        return bookService.searchBooksBySummary(q);
-    }
-    
-    // إضافة كتاب - Admin و Librarian فقط
+    // إضافة كتاب - LIBRARIAN+ فقط
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'LIBRARIAN')")
+    @PreAuthorize("hasAnyRole('LIBRARIAN', 'ADMINISTRATOR')")
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         Book createdBook = bookService.saveBook(book);
         if (createdBook != null) {
@@ -90,9 +78,9 @@ public class BookController {
         }
     }
     
-    // تحديث كتاب - Admin و Librarian فقط
+    // تحديث كتاب - LIBRARIAN+ فقط
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'LIBRARIAN')")
+    @PreAuthorize("hasAnyRole('LIBRARIAN', 'ADMINISTRATOR')")
     public ResponseEntity<Book> updateBook(@PathVariable Integer id, @RequestBody Book bookDetails) {
         Book updatedBook = bookService.updateBook(id, bookDetails);
         if (updatedBook != null) {
@@ -102,7 +90,7 @@ public class BookController {
         }
     }
     
-    // حذف كتاب - Admin فقط
+    // حذف كتاب - ADMINISTRATOR فقط
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<Void> deleteBook(@PathVariable Integer id) {

@@ -1,7 +1,6 @@
 package Library_management_system.Library_management_system.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -35,27 +34,7 @@ public class AuthorService {
     }
     
     public Author getAuthorById(Integer id) {
-        Optional<Author> author = authorRepository.findById(id);
-        if (author.isPresent()) {
-            return author.get();
-        }
-        return null;
-    }
-    
-    public List<Author> getAuthorsByFirstName(String firstName) {
-        return authorRepository.findByFirstNameContainingIgnoreCase(firstName);
-    }
-    
-    public List<Author> getAuthorsByLastName(String lastName) {
-        return authorRepository.findByLastNameContainingIgnoreCase(lastName);
-    }
-    
-    public List<Author> getAuthorsByFullName(String name) {
-        return authorRepository.findByFullNameContaining(name);
-    }
-    
-    public List<Author> searchAuthorsByBiography(String biography) {
-        return authorRepository.findByBiographyContainingIgnoreCase(biography);
+        return authorRepository.findById(id).orElse(null);
     }
     
     public List<Author> searchAuthors(String searchTerm) {
