@@ -1,17 +1,23 @@
-# استخدم JDK 21
-FROM openjdk:21-jdk-slim
-
-# تعريف المتغير PORT
-ENV PORT=8080
-
-# تحديد مجلد العمل
+# -------- مرحلة البناء --------
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# نسخ ملف jar الناتج من المافن
-COPY target/*.jar app.jar
+# انسخ ملفات المشروع إلى داخل الحاوية
+COPY pom.xml .
+COPY src ./src
 
-# فتح المنفذ
+# ابنِ المشروع داخل الحاوية
+RUN mvn clean package -DskipTests
+
+# -------- مرحلة التشغيل --------
+FROM openjdk:21
+WORKDIR /app
+
+# انسخ ملف الـ jar الناتج من المرحلة السابقة
+COPY --from=build /app/target/*.jar app.jar
+
+# افتح المنفذ
 EXPOSE 8080
 
-# تشغيل التطبيق
-CMD ["sh", "-c", "java -jar app.jar"]
+# شغّل التطبيق
+ENTRYPOINT ["java", "-jar", "app.jar"]
